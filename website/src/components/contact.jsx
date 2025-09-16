@@ -15,68 +15,98 @@ const ContactPage = () => {
   const heroRef = useRef(null);
   const isHeroInView = useInView(heroRef, { once: true });
 
-  useEffect(() => {
-    // Load Leaflet CSS and JS
-    const loadLeaflet = async () => {
-      // Load CSS
-      if (!document.querySelector('link[href*="leaflet"]')) {
-        const leafletCSS = document.createElement('link');
-        leafletCSS.rel = 'stylesheet';
-        leafletCSS.href = 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css';
-        document.head.appendChild(leafletCSS);
-      }
+useEffect(() => {
+  // Load Leaflet CSS and JS
+  const loadLeaflet = async () => {
+    // Load CSS
+    if (!document.querySelector('link[href*="leaflet"]')) {
+      const leafletCSS = document.createElement('link');
+      leafletCSS.rel = 'stylesheet';
+      leafletCSS.href = 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css';
+      document.head.appendChild(leafletCSS);
+    }
 
-      // Load JS
-      if (!window.L) {
-        const leafletJS = document.createElement('script');
-        leafletJS.src = 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js';
-        leafletJS.onload = initializeMap;
-        document.body.appendChild(leafletJS);
-      } else {
-        initializeMap();
-      }
-    };
+    // Load JS
+    if (!window.L) {
+      const leafletJS = document.createElement('script');
+      leafletJS.src = 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js';
+      leafletJS.onload = initializeMap;
+      document.body.appendChild(leafletJS);
+    } else {
+      initializeMap();
+    }
+  };
 
-    const initializeMap = () => {
-      if (mapRef.current && window.L && !mapLoaded) {
-        // Harare coordinates
-        const map = window.L.map(mapRef.current).setView([-17.8216, 31.0492], 13);
-        
-        // Custom brown-yellow tile layer
-        window.L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-          attribution: '© OpenStreetMap contributors'
-        }).addTo(map);
+  const initializeMap = () => {
+    if (mapRef.current && window.L && !mapLoaded) {
+      // Set z-index on the map container BEFORE initializing
+      mapRef.current.style.position = 'relative';
+      mapRef.current.style.zIndex = '1';
+      
+      // Harare coordinates
+      const map = window.L.map(mapRef.current, {
+        zoomControl: true,
+        scrollWheelZoom: true,
+        // Ensure map doesn't interfere with other interactions
+        boxZoom: false,
+        doubleClickZoom: false
+      }).setView([-17.8216, 31.0492], 13);
+      
+      // Custom brown-yellow tile layer
+      window.L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© OpenStreetMap contributors'
+      }).addTo(map);
 
-        // Custom marker icon
-        const customIcon = window.L.divIcon({
-          html: `<div class=" w-8 h-8 rounded-sm border-4 border-white shadow-lg flex items-center justify-center">
-                   <div class="w-3 h-3 bg-yellow-400 rounded-sm"></div>
-                 </div>`,
-          className: 'custom-div-icon',
-          iconSize: [32, 32],
-          iconAnchor: [16, 16]
+      // Custom marker icon
+      const customIcon = window.L.divIcon({
+        html: `<div class="w-8 h-8 rounded-sm border-4 border-white shadow-lg flex items-center justify-center">
+                 <div class="w-3 h-3 bg-yellow-400 rounded-sm"></div>
+               </div>`,
+        className: 'custom-div-icon',
+        iconSize: [32, 32],
+        iconAnchor: [16, 16]
+      });
+
+      // Add marker
+      window.L.marker([-17.8216, 31.0492], { icon: customIcon })
+        .addTo(map)
+        .bindPopup(`
+          <div class="p-3 text-center">
+            <h3 class="gellix-font font-bold text-gray-800 mb-2">Sacmar Leaf Tobacco</h3>
+            <p class="gellix-font text-sm text-gray-600">14776 Chawara Road, Off Coventry<br>Harare, Zimbabwe</p>
+          </div>
+        `);
+
+      // Apply brown-yellow filter to map
+      const mapContainer = mapRef.current;
+      mapContainer.style.filter = '';
+      
+      // Additional z-index control after map initialization
+      setTimeout(() => {
+        const leafletPanes = mapContainer.querySelectorAll('.leaflet-pane');
+        leafletPanes.forEach(pane => {
+          pane.style.zIndex = 'auto';
         });
-
-        // Add marker
-        window.L.marker([-17.8216, 31.0492], { icon: customIcon })
-          .addTo(map)
-          .bindPopup(`
-            <div class="p-3 text-center">
-              <h3 class="gellix-font font-bold text-gray-800 mb-2">Sacmar Leaf Tobacco</h3>
-              <p class="gellix-font text-sm text-gray-600">14776 Chawara Road, Off Coventry<br>Harare, Zimbabwe</p>
-            </div>
-          `);
-
-        // Apply brown-yellow filter to map
-        const mapContainer = mapRef.current;
-        mapContainer.style.filter = '';
         
-        setMapLoaded(true);
-      }
-    };
+        // Specifically target the popup pane to ensure it doesn't go too high
+        const popupPane = mapContainer.querySelector('.leaflet-popup-pane');
+        if (popupPane) {
+          popupPane.style.zIndex = '600';
+        }
+        
+        // Control the marker pane
+        const markerPane = mapContainer.querySelector('.leaflet-marker-pane');
+        if (markerPane) {
+          markerPane.style.zIndex = '500';
+        }
+      }, 100);
+      
+      setMapLoaded(true);
+    }
+  };
 
-    loadLeaflet();
-  }, [mapLoaded]);
+  loadLeaflet();
+}, [mapLoaded]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -136,7 +166,7 @@ const ContactPage = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-amber-50 via-yellow-50 to-orange-50">
       {/* Animated Hero Section */}
-      <section ref={heroRef} className="relative py-16 sm:py-20 md:py-24 lg:py-32 overflow-hidden">
+      <section ref={heroRef} className="relative py-16 sm:py-20 md:py-24 lg:py-32 overflow-hidden ">
                 <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{
@@ -150,7 +180,7 @@ const ContactPage = () => {
           <div className="absolute top-1/2 left-1/2 w-32 sm:w-48 md:w-64 h-32 sm:h-48 md:h-64 bg-orange-400/10 rounded-sm blur-2xl animate-pulse delay-500"></div>
         </div>
         
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-20">
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={isHeroInView ? { opacity: 1, scale: 1 } : {}}
