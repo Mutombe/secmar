@@ -183,14 +183,6 @@ const Navigation = () => {
                   {/* Contact Info */}
                   <div className="grid grid-cols-1 gap-3 text-center">
                     <div className="flex items-center justify-center space-x-2 text-white/80">
-                      <Phone className="h-4 w-4" />
-                      <span className="gellix-font text-sm">+1 (555) 123-4567</span>
-                    </div>
-                    <div className="flex items-center justify-center space-x-2 text-white/80">
-                      <Mail className="h-4 w-4" />
-                      <span className="gellix-font text-sm">info@sacmarleaf.com</span>
-                    </div>
-                    <div className="flex items-center justify-center space-x-2 text-white/80">
                       <MapPin className="h-4 w-4" />
                       <span className="gellix-font text-sm">Premium Tobacco Solutions</span>
                     </div>
