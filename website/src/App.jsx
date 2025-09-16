@@ -17,6 +17,7 @@ import ContactPage from "./components/contact";
 import Footer from "./components/footer";
 import { motion, AnimatePresence } from "framer-motion";
 import { preloadImages } from "./utils";
+import GalleryPage from "./components/gallery";
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -254,6 +255,7 @@ const AppContent = () => {
           <Route path="/products" element={<ProductsPage />} />
           <Route path="/services" element={<ServicesPage />} />
           <Route path="/quality" element={<QualityPage />} />
+          <Route path="/gallery" element={<GalleryPage />} />
           <Route path="/contact" element={<ContactPage />} />
         </Routes>
         <Footer />

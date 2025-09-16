@@ -12,9 +12,6 @@ import { FaFileContract } from "react-icons/fa6";
 import { GrTechnology } from "react-icons/gr";
 
 
-
-
-
 const AboutPage = () => {
   const [activeTimeline, setActiveTimeline] = useState(0);
   const [visibleStats, setVisibleStats] = useState(false);
@@ -27,7 +24,7 @@ const AboutPage = () => {
   }, []);
 
   const stats = [
-    { number: "500+", label: "Partner Farmers", icon: GiFarmer },
+    { number: "1000+", label: "Partner Farmers", icon: GiFarmer },
     { number: "15", label: "Years Experience", icon: FaCalendarDays },
     { number: "25+", label: "Export Countries", icon: GiWorld },
     { number: "98%", label: "Quality Rate", icon: GrSecure }

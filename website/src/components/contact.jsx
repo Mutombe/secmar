@@ -50,7 +50,7 @@ useEffect(() => {
         // Ensure map doesn't interfere with other interactions
         boxZoom: false,
         doubleClickZoom: false
-      }).setView([-17.8216, 31.0492], 13);
+      }).setView([-17.8508592, 30.8466406], 13);
       
       // Custom brown-yellow tile layer
       window.L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -60,7 +60,7 @@ useEffect(() => {
       // Custom marker icon
       const customIcon = window.L.divIcon({
         html: `<div class="w-8 h-8 rounded-sm border-4 border-white shadow-lg flex items-center justify-center">
-                 <div class="w-3 h-3 bg-yellow-400 rounded-sm"></div>
+                 <div class="w-3 h-3 bg-gradient-to-br from-amber-400 to-orange-500 rounded-sm"></div>
                </div>`,
         className: 'custom-div-icon',
         iconSize: [32, 32],
@@ -68,7 +68,7 @@ useEffect(() => {
       });
 
       // Add marker
-      window.L.marker([-17.8216, 31.0492], { icon: customIcon })
+      window.L.marker([-17.8508592, 30.8466406], { icon: customIcon })
         .addTo(map)
         .bindPopup(`
           <div class="p-3 text-center">
@@ -164,16 +164,16 @@ useEffect(() => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-amber-50 via-yellow-50 to-orange-50">
+    <div className="min-h-screen bg-gradient-to-br from-green-50 via-yellow-25 to-white">
       {/* Animated Hero Section */}
       <section ref={heroRef} className="relative py-16 sm:py-20 md:py-24 lg:py-32 overflow-hidden ">
                 <div
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-50"
           style={{
-            backgroundImage: `url('/farm2.jpg')`,
+            backgroundImage: `url('/field.png')`,
           }}
         />
-        <div className="absolute inset-0 bg-gradient-to-br from-green-900/20 to-yellow-900/20"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-green-900/80 via-black/60 to-yellow-900/80" />
         <div className="absolute inset-0">
           <div className="absolute top-4 sm:top-10 left-4 sm:left-10 w-16 sm:w-24 md:w-32 h-16 sm:h-24 md:h-32 bg-yellow-400/20 rounded-sm blur-xl animate-pulse"></div>
           <div className="absolute bottom-8 sm:bottom-16 md:bottom-20 right-4 sm:right-10 md:right-20 w-24 sm:w-32 md:w-48 h-24 sm:h-32 md:h-48 bg-green-400/20 rounded-sm blur-xl animate-pulse delay-1000"></div>

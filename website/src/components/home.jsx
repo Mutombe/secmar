@@ -205,17 +205,6 @@ const HomePage = () => {
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
             {[
               {
-                name: "Tobacco Fines",
-                image: "/fine.png",
-                description:
-                  "Premium fine-grade tobacco for specialized applications",
-              },
-              {
-                name: "Tobacco Stems",
-                image: "/stem.png",
-                description: "High-quality stems processed for industrial use",
-              },
-              {
                 name: "Cut Rug",
                 image: "/rug.png",
                 description:
@@ -225,6 +214,17 @@ const HomePage = () => {
                 name: "Tobacco Lamina",
                 image: "/lumina.jpeg",
                 description: "Pure tobacco leaf lamina for premium products",
+              },
+              {
+                name: "Tobacco Stems",
+                image: "/stem.png",
+                description: "High-quality stems processed for industrial use",
+              },
+              {
+                name: "Tobacco Fines",
+                image: "/fine.png",
+                description:
+                  "Premium fine-grade tobacco for specialized applications",
               },
             ].map((product, index) => (
               <motion.div

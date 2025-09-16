@@ -40,9 +40,9 @@ const ServicesPage = () => {
       title: "Crop Production",
       subtitle: "From Seed to Harvest",
       stats: [
-        { number: "500+", label: "Contract Farmers" },
+        { number: "1000+", label: "Contract Farmers" },
         { number: "95%", label: "Quality Rate" },
-        { number: "10K", label: "Hectares Managed" },
+        { number: "3K", label: "Hectares Managed" },
       ],
       features: [
         {
