@@ -125,15 +125,6 @@ const Navigation = () => {
               
               {/* Main Navigation Links */}
               <div className="flex-1 flex flex-col justify-center px-8">
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 0.2 }}
-                  className="text-center mb-8"
-                >
-                  <h2 className="gellix-font text-3xl font-bold text-white mb-2">Navigation</h2>
-                  <div className="w-16 h-1 bg-gradient-to-r from-yellow-400 to-green-400 mx-auto rounded-sm"></div>
-                </motion.div>
 
                 <div className="space-y-4">
                   {navLinks.map((link, index) => (
