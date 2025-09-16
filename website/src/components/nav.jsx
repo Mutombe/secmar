@@ -92,7 +92,7 @@ const Navigation = () => {
               onClick={() => setIsOpen(!isOpen)}
               className="md:hidden flex items-center z-60 relative"
             >
-              {isOpen ? <X className="h-6 w-6" /> : <HiOutlineMenuAlt3 className="h-6 w-6" />}
+              {isOpen ? <MdOutlineCloseFullscreen className="h-6 w-6" /> : <HiOutlineMenuAlt3 className="h-6 w-6" />}
             </button>
           </div>
         </div>
