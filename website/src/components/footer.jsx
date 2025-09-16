@@ -1,9 +1,10 @@
-
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronRight, ChevronLeft, Menu, X, Phone, Mail, MapPin, Leaf, Award, Users, Globe, CheckCircle, ArrowRight, Sun, Droplet, TrendingUp, Package, Shield, Sparkles } from 'lucide-react';
+import { ChevronRight, ChevronLeft, Menu, X, Phone, Mail, MapPin, Leaf, Award, Users, Globe, CheckCircle, ArrowRight, Sun, Droplet, TrendingUp, Package, Shield, Sparkles, Facebook, Linkedin, Twitter, Instagram } from 'lucide-react';
 import { Toaster, toast } from 'sonner';
+import { FaXTwitter } from "react-icons/fa6";
+
 
 const Footer = () => {
   return (
@@ -67,7 +68,21 @@ const Footer = () => {
             <p className="gellix-font text-gray-400 text-sm mb-4 md:mb-0">
               © 2025 Sacmar Leaf Tobacco Pvt Ltd. All rights reserved.
             </p>
-            <div className="flex space-x-6">
+            <div className="flex items-center space-x-6">
+              <div className="flex space-x-4">
+                <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-blue-400 transition-colors">
+                  <Facebook className="w-5 h-5" />
+                </a>
+                <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-blue-500 transition-colors">
+                  <Linkedin className="w-5 h-5" />
+                </a>
+                <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-blue-400 transition-colors">
+                  <FaXTwitter className="w-5 h-5" />
+                </a>
+                <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-pink-400 transition-colors">
+                  <Instagram className="w-5 h-5" />
+                </a>
+              </div>
               <span className="gellix-font text-xs text-gray-500">Excellence in Tobacco</span>
             </div>
           </div>
