@@ -27,7 +27,7 @@ const Footer = () => {
             <h4 className="gellix-font font-bold text-lg mb-4 text-green-400">Quick Links</h4>
             <ul className="space-y-2">
               <li><Link to="/about" className="gellix-font text-gray-400 hover:text-white transition-colors">About Us</Link></li>
-              <li><Link to="/products" className="gellix-font text-gray-400 hover:text-white transition-colors">Products</Link></li>
+              <li><Link to="/contact" className="gellix-font text-gray-400 hover:text-white transition-colors">Contact Us</Link></li>
               <li><Link to="/services" className="gellix-font text-gray-400 hover:text-white transition-colors">Services</Link></li>
               <li><Link to="/quality" className="gellix-font text-gray-400 hover:text-white transition-colors">Quality</Link></li>
             </ul>
