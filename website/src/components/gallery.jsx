@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { 
-  ChevronLeft, 
-  ChevronRight, 
-  X, 
-  Filter, 
-  Grid3X3, 
-  Square, 
+import React, { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import {
+  ChevronLeft,
+  ChevronRight,
+  X,
+  Filter,
+  Grid3X3,
+  Square,
   Camera,
   Calendar,
   MapPin,
@@ -17,130 +17,149 @@ import {
   Play,
   Pause,
   SkipBack,
-  SkipForward
-} from 'lucide-react';
+  SkipForward,
+} from "lucide-react";
+import { FaAngleDoubleUp } from "react-icons/fa";
 
 const GalleryPage = () => {
-  const [selectedCategory, setSelectedCategory] = useState('all');
+  const [selectedCategory, setSelectedCategory] = useState("all");
   const [selectedImage, setSelectedImage] = useState(null);
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [viewMode, setViewMode] = useState('grid'); // 'grid' or 'masonry'
+  const [viewMode, setViewMode] = useState("grid"); // 'grid' or 'masonry'
 
   // Sample gallery data - replace with your actual images
   const galleryItems = [
     {
       id: 1,
-      src: '/7.jpg',
-      category: 'tobacco',
-      title: 'Premium Tobacco Leaves',
-      description: 'High-quality tobacco leaves ready for processing',
-      location: 'Harare, Zimbabwe',
-      date: '2024'
+      src: "/7.jpg",
+      category: "tobacco",
+      title: "Premium Tobacco Leaves",
+      description: "High-quality tobacco leaves ready for processing",
+      location: "Harare, Zimbabwe",
+      date: "2024",
     },
     {
       id: 2,
-      src: '/3.jpg',
-      category: 'processing',
-      title: 'Quality Processing',
-      description: 'State-of-the-art tobacco processing facility',
-      location: 'Processing Plant',
-      date: '2024'
+      src: "/3.jpg",
+      category: "processing",
+      title: "Quality Processing",
+      description: "State-of-the-art tobacco processing facility",
+      location: "Processing Plant",
+      date: "2024",
     },
     {
       id: 3,
-      src: '/12.jpg',
-      category: 'floors',
-      title: 'Curing Floors',
-      description: 'Traditional tobacco curing floors ensuring optimal quality',
-      location: 'Curing Facility',
-      date: '2024'
+      src: "/12.jpg",
+      category: "floors",
+      title: "Curing Floors",
+      description: "Traditional tobacco curing floors ensuring optimal quality",
+      location: "Curing Facility",
+      date: "2024",
     },
     {
       id: 4,
-      src: '/farm1.jpg',
-      category: 'tobacco',
-      title: 'Tobacco Plantation',
-      description: 'Expansive tobacco fields under perfect growing conditions',
-      location: 'Rural Zimbabwe',
-      date: '2024'
+      src: "/farm1.jpg",
+      category: "tobacco",
+      title: "Tobacco Plantation",
+      description: "Expansive tobacco fields under perfect growing conditions",
+      location: "Rural Zimbabwe",
+      date: "2024",
     },
     {
       id: 5,
-      src: '/fine.png',
-      category: 'processing',
-      title: 'Tobacco Fines',
-      description: 'Precisely processed tobacco fines for export',
-      location: 'Processing Center',
-      date: '2024'
+      src: "/fine.png",
+      category: "processing",
+      title: "Tobacco Fines",
+      description: "Precisely processed tobacco fines for export",
+      location: "Processing Center",
+      date: "2024",
     },
     {
       id: 6,
-      src: '/stem.png',
-      category: 'processing',
-      title: 'Tobacco Stems',
-      description: 'Quality tobacco stems prepared for industrial applications',
-      location: 'Processing Facility',
-      date: '2024'
+      src: "/stem.png",
+      category: "processing",
+      title: "Tobacco Stems",
+      description: "Quality tobacco stems prepared for industrial applications",
+      location: "Processing Facility",
+      date: "2024",
     },
     {
       id: 7,
-      src: '/rug.png',
-      category: 'processing',
-      title: 'Cut Rug Tobacco',
-      description: 'Expertly cut tobacco meeting international standards',
-      location: 'Export Preparation',
-      date: '2024'
+      src: "/rug.png",
+      category: "processing",
+      title: "Cut Rug Tobacco",
+      description: "Expertly cut tobacco meeting international standards",
+      location: "Export Preparation",
+      date: "2024",
     },
     {
       id: 8,
-      src: '/lumina.jpeg',
-      category: 'processing',
-      title: 'Tobacco Lamina',
-      description: 'Pure tobacco leaf lamina for premium products',
-      location: 'Quality Control',
-      date: '2024'
+      src: "/lumina.jpeg",
+      category: "processing",
+      title: "Tobacco Lamina",
+      description: "Pure tobacco leaf lamina for premium products",
+      location: "Quality Control",
+      date: "2024",
     },
     {
       id: 9,
-      src: '/l1.jpg',
-      category: 'events',
-      title: 'Leadership Meeting',
-      description: 'Strategic planning session with management team',
-      location: 'Head Office',
-      date: '2024'
+      src: "/l1.jpg",
+      category: "events",
+      title: "Leadership Meeting",
+      description: "Strategic planning session with management team",
+      location: "Head Office",
+      date: "2024",
     },
     {
       id: 10,
-      src: '/farm8.webp',
-      category: 'events',
-      title: 'Quality Inspection',
-      description: 'Regular quality assurance and inspection process',
-      location: 'Processing Plant',
-      date: '2024'
+      src: "/farm8.webp",
+      category: "events",
+      title: "Quality Inspection",
+      description: "Regular quality assurance and inspection process",
+      location: "Processing Plant",
+      date: "2024",
     },
     {
       id: 11,
-      src: '/field.png',
-      category: 'events',
-      title: 'International Partnership',
-      description: 'Meeting with international trade representatives',
-      location: 'Jakarta, Indonesia',
-      date: '2024'
-    }
+      src: "/field.png",
+      category: "events",
+      title: "International Partnership",
+      description: "Meeting with international trade representatives",
+      location: "Jakarta, Indonesia",
+      date: "2024",
+    },
   ];
 
   const categories = [
-    { id: 'all', label: 'All Gallery', count: galleryItems.length },
-    { id: 'tobacco', label: 'Tobacco Fields', count: galleryItems.filter(item => item.category === 'tobacco').length },
-    { id: 'processing', label: 'Processing', count: galleryItems.filter(item => item.category === 'processing').length },
-    { id: 'floors', label: 'Curing Floors', count: galleryItems.filter(item => item.category === 'floors').length },
-    { id: 'events', label: 'Events', count: galleryItems.filter(item => item.category === 'events').length }
+    { id: "all", label: "All Gallery", count: galleryItems.length },
+    {
+      id: "tobacco",
+      label: "Tobacco Fields",
+      count: galleryItems.filter((item) => item.category === "tobacco").length,
+    },
+    {
+      id: "processing",
+      label: "Processing",
+      count: galleryItems.filter((item) => item.category === "processing")
+        .length,
+    },
+    {
+      id: "floors",
+      label: "Curing Floors",
+      count: galleryItems.filter((item) => item.category === "floors").length,
+    },
+    {
+      id: "events",
+      label: "Events",
+      count: galleryItems.filter((item) => item.category === "events").length,
+    },
   ];
 
-  const filteredItems = selectedCategory === 'all' 
-    ? galleryItems 
-    : galleryItems.filter(item => item.category === selectedCategory);
+  const filteredItems =
+    selectedCategory === "all"
+      ? galleryItems
+      : galleryItems.filter((item) => item.category === selectedCategory);
 
   // Slideshow functionality
   useEffect(() => {
@@ -164,11 +183,14 @@ const GalleryPage = () => {
 
   const nextImage = () => {
     setCurrentSlideIndex((prev) => (prev + 1) % filteredItems.length);
-    setSelectedImage(filteredItems[(currentSlideIndex + 1) % filteredItems.length]);
+    setSelectedImage(
+      filteredItems[(currentSlideIndex + 1) % filteredItems.length]
+    );
   };
 
   const prevImage = () => {
-    const newIndex = (currentSlideIndex - 1 + filteredItems.length) % filteredItems.length;
+    const newIndex =
+      (currentSlideIndex - 1 + filteredItems.length) % filteredItems.length;
     setCurrentSlideIndex(newIndex);
     setSelectedImage(filteredItems[newIndex]);
   };
@@ -186,7 +208,7 @@ const GalleryPage = () => {
             className="w-full h-full object-cover opacity-20"
           />
         </div>
-        
+
         <div className="relative z-10 w-full px-4 sm:px-6 lg:px-8">
           <div className="max-w-7xl mx-auto text-center text-white">
             <motion.div
@@ -201,7 +223,8 @@ const GalleryPage = () => {
                 OUR <span className="text-yellow-400">GALLERY</span>
               </h1>
               <p className="gellix-font text-lg sm:text-xl lg:text-2xl max-w-3xl mx-auto mb-8">
-                Explore the journey from field to export through our comprehensive visual documentation
+                Explore the journey from field to export through our
+                comprehensive visual documentation
               </p>
               <div className="flex flex-wrap justify-center gap-4 text-sm sm:text-base">
                 <div className="flex items-center gap-2">
@@ -230,8 +253,8 @@ const GalleryPage = () => {
                   onClick={() => setSelectedCategory(category.id)}
                   className={`gellix-font px-4 py-2 sm:px-6 sm:py-3 rounded-sm font-bold text-sm sm:text-base transition-all duration-300 ${
                     selectedCategory === category.id
-                      ? 'bg-green-700 text-white shadow-lg'
-                      : 'bg-white text-gray-700 hover:bg-green-100 border border-gray-200'
+                      ? "bg-green-700 text-white shadow-lg"
+                      : "bg-white text-gray-700 hover:bg-green-100 border border-gray-200"
                   }`}
                 >
                   {category.label}
@@ -243,17 +266,21 @@ const GalleryPage = () => {
             {/* View Mode Toggle */}
             <div className="flex items-center gap-2 bg-white p-1 rounded-sm border border-gray-200">
               <button
-                onClick={() => setViewMode('grid')}
+                onClick={() => setViewMode("grid")}
                 className={`p-2 rounded-sm transition-colors ${
-                  viewMode === 'grid' ? 'bg-green-700 text-white' : 'text-gray-500 hover:text-gray-700'
+                  viewMode === "grid"
+                    ? "bg-green-700 text-white"
+                    : "text-gray-500 hover:text-gray-700"
                 }`}
               >
                 <Grid3X3 className="w-5 h-5" />
               </button>
               <button
-                onClick={() => setViewMode('masonry')}
+                onClick={() => setViewMode("masonry")}
                 className={`p-2 rounded-sm transition-colors ${
-                  viewMode === 'masonry' ? 'bg-green-700 text-white' : 'text-gray-500 hover:text-gray-700'
+                  viewMode === "masonry"
+                    ? "bg-green-700 text-white"
+                    : "text-gray-500 hover:text-gray-700"
                 }`}
               >
                 <Square className="w-5 h-5" />
@@ -274,9 +301,9 @@ const GalleryPage = () => {
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.6 }}
               className={
-                viewMode === 'grid' 
-                  ? 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6' 
-                  : 'columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-4 sm:gap-6 space-y-4 sm:space-y-6'
+                viewMode === "grid"
+                  ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6"
+                  : "columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-4 sm:gap-6 space-y-4 sm:space-y-6"
               }
             >
               {filteredItems.map((item, index) => (
@@ -286,7 +313,7 @@ const GalleryPage = () => {
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
                   className={`group cursor-pointer ${
-                    viewMode === 'masonry' ? 'break-inside-avoid' : ''
+                    viewMode === "masonry" ? "break-inside-avoid" : ""
                   }`}
                   onClick={() => openLightbox(item, index)}
                 >
@@ -297,12 +324,16 @@ const GalleryPage = () => {
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                       loading="lazy"
                     />
-                    
+
                     {/* Overlay */}
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
                       <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6 text-white">
-                        <h3 className="gellix-font text-lg sm:text-xl font-bold mb-2">{item.title}</h3>
-                        <p className="gellix-font text-sm text-gray-200 mb-3">{item.description}</p>
+                        <h3 className="gellix-font text-lg sm:text-xl font-bold mb-2">
+                          {item.title}
+                        </h3>
+                        <p className="gellix-font text-sm text-gray-200 mb-3">
+                          {item.description}
+                        </p>
                         <div className="flex items-center justify-between text-xs">
                           <div className="flex items-center gap-1">
                             <MapPin className="w-3 h-3" />
@@ -314,7 +345,7 @@ const GalleryPage = () => {
                           </div>
                         </div>
                       </div>
-                      
+
                       {/* Zoom Icon */}
                       <div className="absolute top-4 right-4 bg-yellow-400 p-2 rounded-sm">
                         <ZoomIn className="w-4 h-4 text-green-900" />
@@ -323,7 +354,9 @@ const GalleryPage = () => {
 
                     {/* Category Badge */}
                     <div className="absolute top-4 left-4 bg-green-700 text-white px-2 py-1 rounded-sm text-xs font-bold">
-                      <span className="gellix-font">{item.category.toUpperCase()}</span>
+                      <span className="gellix-font">
+                        {item.category.toUpperCase()}
+                      </span>
                     </div>
                   </div>
                 </motion.div>
@@ -343,31 +376,42 @@ const GalleryPage = () => {
             className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center p-4"
             onClick={closeLightbox}
           >
-            <div className="relative max-w-7xl w-full h-full flex flex-col" onClick={(e) => e.stopPropagation()}>
+            <div
+              className="relative max-w-7xl w-full h-full flex flex-col"
+              onClick={(e) => e.stopPropagation()}
+            >
               {/* Header */}
               <div className="flex items-center justify-between p-4 bg-black/50 backdrop-blur-sm rounded-sm mb-4">
                 <div className="text-white">
-                  <h3 className="gellix-font text-xl font-bold">{selectedImage.title}</h3>
-                  <p className="gellix-font text-sm text-gray-300">{currentSlideIndex + 1} of {filteredItems.length}</p>
+                  <h3 className="gellix-font text-xl font-bold">
+                    {selectedImage.title}
+                  </h3>
+                  <p className="gellix-font text-sm text-gray-300">
+                    {currentSlideIndex + 1} of {filteredItems.length}
+                  </p>
                 </div>
-                
+
                 <div className="flex items-center gap-3">
                   {/* Slideshow Controls */}
                   <button
                     onClick={() => setIsPlaying(!isPlaying)}
                     className="text-white hover:text-yellow-400 transition-colors p-2"
                   >
-                    {isPlaying ? <Pause className="w-5 h-5" /> : <Play className="w-5 h-5" />}
+                    {isPlaying ? (
+                      <Pause className="w-5 h-5" />
+                    ) : (
+                      <Play className="w-5 h-5" />
+                    )}
                   </button>
-                  
+
                   <button className="text-white hover:text-yellow-400 transition-colors p-2">
                     <Share2 className="w-5 h-5" />
                   </button>
-                  
+
                   <button className="text-white hover:text-yellow-400 transition-colors p-2">
                     <Download className="w-5 h-5" />
                   </button>
-                  
+
                   <button
                     onClick={closeLightbox}
                     className="text-white hover:text-red-400 transition-colors p-2"
@@ -396,7 +440,7 @@ const GalleryPage = () => {
                 >
                   <ChevronLeft className="w-6 h-6" />
                 </button>
-                
+
                 <button
                   onClick={nextImage}
                   className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-3 rounded-sm backdrop-blur-sm transition-colors"
@@ -409,42 +453,56 @@ const GalleryPage = () => {
               <div className="bg-black/50 backdrop-blur-sm rounded-sm p-4 mt-4 text-white">
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                   <div>
-                    <p className="gellix-font text-sm text-gray-300 mb-2">{selectedImage.description}</p>
+                    <p className="gellix-font text-sm text-gray-300 mb-2">
+                      {selectedImage.description}
+                    </p>
                     <div className="flex items-center gap-4 text-xs">
                       <div className="flex items-center gap-1">
                         <MapPin className="w-3 h-3 text-yellow-400" />
-                        <span className="gellix-font">{selectedImage.location}</span>
+                        <span className="gellix-font">
+                          {selectedImage.location}
+                        </span>
                       </div>
                       <div className="flex items-center gap-1">
                         <Calendar className="w-3 h-3 text-yellow-400" />
-                        <span className="gellix-font">{selectedImage.date}</span>
+                        <span className="gellix-font">
+                          {selectedImage.date}
+                        </span>
                       </div>
                     </div>
                   </div>
-                  
+
                   {/* Thumbnail Navigation */}
                   <div className="flex items-center gap-2">
-                    {filteredItems.slice(Math.max(0, currentSlideIndex - 2), currentSlideIndex + 3).map((item, index) => {
-                      const actualIndex = Math.max(0, currentSlideIndex - 2) + index;
-                      return (
-                        <button
-                          key={item.id}
-                          onClick={() => {
-                            setCurrentSlideIndex(actualIndex);
-                            setSelectedImage(item);
-                          }}
-                          className={`w-12 h-12 rounded-sm overflow-hidden border-2 transition-all ${
-                            actualIndex === currentSlideIndex ? 'border-yellow-400' : 'border-transparent hover:border-white/50'
-                          }`}
-                        >
-                          <img
-                            src={item.src}
-                            alt={item.title}
-                            className="w-full h-full object-cover"
-                          />
-                        </button>
-                      );
-                    })}
+                    {filteredItems
+                      .slice(
+                        Math.max(0, currentSlideIndex - 2),
+                        currentSlideIndex + 3
+                      )
+                      .map((item, index) => {
+                        const actualIndex =
+                          Math.max(0, currentSlideIndex - 2) + index;
+                        return (
+                          <button
+                            key={item.id}
+                            onClick={() => {
+                              setCurrentSlideIndex(actualIndex);
+                              setSelectedImage(item);
+                            }}
+                            className={`w-12 h-12 rounded-sm overflow-hidden border-2 transition-all ${
+                              actualIndex === currentSlideIndex
+                                ? "border-yellow-400"
+                                : "border-transparent hover:border-white/50"
+                            }`}
+                          >
+                            <img
+                              src={item.src}
+                              alt={item.title}
+                              className="w-full h-full object-cover"
+                            />
+                          </button>
+                        );
+                      })}
                   </div>
                 </div>
               </div>
@@ -452,6 +510,16 @@ const GalleryPage = () => {
           </motion.div>
         )}
       </AnimatePresence>
+      <motion.button
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.9 }}
+        onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+        className="fixed bottom-8 right-8 w-12 h-12 bg-gradient-to-r from-green-700 to-yellow-300 text-white rounded-full shadow-lg flex items-center justify-center hover:shadow-xl transition z-40"
+      >
+        <FaAngleDoubleUp className="w-4 h-4" />
+      </motion.button>
     </div>
   );
 };

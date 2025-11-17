@@ -1,16 +1,26 @@
-import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronRight, ChevronLeft, Menu, X, Phone, Mail, MapPin, Leaf, Award, Users, Globe, CheckCircle, ArrowRight, Sun, Droplet, TrendingUp, Package, Shield, Sparkles, Facebook, Linkedin, Twitter, Instagram } from 'lucide-react';
-import { Toaster, toast } from 'sonner';
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { Phone, Mail, MapPin, Facebook, Linkedin, Twitter, Instagram } from 'lucide-react';
 import { FaXTwitter } from "react-icons/fa6";
-
 
 const Footer = () => {
   return (
-    <footer className="bg-gradient-to-br from-gray-900 to-black text-white pt-16 pb-8">
-      <div className="max-w-7xl mx-auto px-4">
+    <footer className="relative bg-gradient-to-br from-gray-900 to-black text-white pt-16 pb-8 overflow-hidden">
+      {/* Background Image Layer */}
+      <div className="absolute inset-0 opacity-50">
+        <img 
+          src="/farm8.webp" 
+          alt="Background" 
+          className="w-full h-full object-cover"
+        />
+      </div>
+      {/* Gradient Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-br from-gray-900/45 to-black/45"></div>
+      
+      {/* Content */}
+      <div className="max-w-7xl mx-auto px-4 relative z-10">
         <div className="grid md:grid-cols-4 gap-8 mb-12">
+          {/* Company Info */}
           <div>
             <div className="flex items-center space-x-3 mb-6">
               <div>
@@ -24,6 +34,7 @@ const Footer = () => {
             </p>
           </div>
           
+          {/* Quick Links */}
           <div>
             <h4 className="gellix-font font-bold text-lg mb-4 text-green-400">Quick Links</h4>
             <ul className="space-y-2">
@@ -34,6 +45,7 @@ const Footer = () => {
             </ul>
           </div>
           
+          {/* Products */}
           <div>
             <h4 className="gellix-font font-bold text-lg mb-4 text-yellow-400">Products</h4>
             <ul className="space-y-2">
@@ -44,6 +56,7 @@ const Footer = () => {
             </ul>
           </div>
           
+          {/* Contact Info */}
           <div>
             <h4 className="gellix-font font-bold text-lg mb-4 text-green-400">Contact Info</h4>
             <ul className="space-y-2 text-gray-400 text-sm">
@@ -57,12 +70,13 @@ const Footer = () => {
               </li>
               <li className="flex items-start space-x-2">
                 <MapPin className="w-4 h-4 mt-1" />
-                <span className='gellix-font'>14776 Chawara Road, Harare</span>
+                <span className='gellix-font'>960 Hungardown Road, Glen Lorne, Harare</span>
               </li>
             </ul>
           </div>
         </div>
         
+        {/* Bottom Section */}
         <div className="border-t border-gray-800 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <p className="gellix-font text-gray-400 text-sm mb-4 md:mb-0">
@@ -85,6 +99,21 @@ const Footer = () => {
               </div>
               <span className="gellix-font text-xs text-gray-500">Excellence in Tobacco</span>
             </div>
+          </div>
+          
+          {/* Designer Credit */}
+          <div className="text-center mt-6 pt-6 border-t border-gray-800">
+            <p className="gellix-font text-gray-500 text-xs">
+              Designed by{' '}
+              <a 
+                href="https://bitstudio.co.zw" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-green-400 hover:text-green-300 transition-colors font-semibold"
+              >
+                Bit Studio
+              </a>
+            </p>
           </div>
         </div>
       </div>

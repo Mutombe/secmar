@@ -1,6 +1,24 @@
-import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Shield, Award, Users, Globe, CheckCircle, ArrowRight, Leaf, TrendingUp, Package, Eye, Target, Star, Zap, Activity, BarChart3, PieChart, Microscope } from 'lucide-react';
+import React, { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import {
+  Shield,
+  Award,
+  Users,
+  Globe,
+  CheckCircle,
+  ArrowRight,
+  Leaf,
+  TrendingUp,
+  Package,
+  Eye,
+  Target,
+  Star,
+  Zap,
+  Activity,
+  BarChart3,
+  PieChart,
+  Microscope,
+} from "lucide-react";
 import { SiPlanetscale } from "react-icons/si";
 import { FaFileContract } from "react-icons/fa6";
 import { GrTechnology } from "react-icons/gr";
@@ -15,90 +33,91 @@ import { GrSecure } from "react-icons/gr";
 import { GiLindenLeaf } from "react-icons/gi";
 import { GiFarmTractor } from "react-icons/gi";
 import { GiManualMeatGrinder } from "react-icons/gi";
+import { FaAngleDoubleUp } from "react-icons/fa";
 
 const QualityPage = () => {
-  const [activeTab, setActiveTab] = useState('standards');
+  const [activeTab, setActiveTab] = useState("standards");
   const [hoveredStat, setHoveredStat] = useState(null);
 
   const qualityMetrics = [
-    { 
-      label: "Quality Rate", 
-      value: "95%", 
-      icon: <SiFsecure className="w-6 h-6" />, 
+    {
+      label: "Quality Rate",
+      value: "95%",
+      icon: <SiFsecure className="w-6 h-6" />,
       color: "from-green-500 to-emerald-600",
-      bgImage: "/4.jpg"
+      bgImage: "/4.jpg",
     },
-    { 
-      label: "Audit Score", 
-      value: "A+", 
-      icon: <AiOutlineAudit className="w-6 h-6" />, 
+    {
+      label: "Audit Score",
+      value: "A+",
+      icon: <AiOutlineAudit className="w-6 h-6" />,
       color: "from-yellow-500 to-amber-600",
-      bgImage: "/6.jpg"
+      bgImage: "/6.jpg",
     },
-    { 
-      label: "Compliance", 
-      value: "100%", 
-      icon: <LiaAwardSolid className="w-6 h-6" />, 
+    {
+      label: "Compliance",
+      value: "100%",
+      icon: <LiaAwardSolid className="w-6 h-6" />,
       color: "from-green-600 to-green-700",
-      bgImage: "/8.jpg"
+      bgImage: "/8.jpg",
     },
-    { 
-      label: "Certifications", 
-      value: "12+", 
-      icon: <GrSecure className="w-6 h-6" />, 
+    {
+      label: "Certifications",
+      value: "12+",
+      icon: <GrSecure className="w-6 h-6" />,
       color: "from-amber-500 to-orange-600",
-      bgImage: "/13.jpg"
-    }
+      bgImage: "/13.jpg",
+    },
   ];
 
   const qualityStages = [
     {
-      id: 'seed',
-      title: 'Seed Selection',
-      description: 'Premium varieties chosen for optimal yield and quality',
+      id: "seed",
+      title: "Seed Selection",
+      description: "Premium varieties chosen for optimal yield and quality",
       icon: <GiLindenLeaf className="w-6 h-6 md:w-8 md:h-8" />,
-      position: { x: 10, y: 20 }
+      position: { x: 10, y: 20 },
     },
     {
-      id: 'cultivation',
-      title: 'Cultivation',
-      description: 'Expert guidance and regular monitoring',
+      id: "cultivation",
+      title: "Cultivation",
+      description: "Expert guidance and regular monitoring",
       icon: <GiFarmTractor className="w-6 h-6 md:w-8 md:h-8" />,
-      position: { x: 30, y: 60 }
+      position: { x: 30, y: 60 },
     },
     {
-      id: 'harvest',
-      title: 'Harvest',
-      description: 'Optimal timing for maximum quality',
+      id: "harvest",
+      title: "Harvest",
+      description: "Optimal timing for maximum quality",
       icon: <Package className="w-6 h-6 md:w-8 md:h-8" />,
-      position: { x: 70, y: 40 }
+      position: { x: 70, y: 40 },
     },
     {
-      id: 'processing',
-      title: 'Processing',
-      description: 'Controlled curing and fermentation',
+      id: "processing",
+      title: "Processing",
+      description: "Controlled curing and fermentation",
       icon: <GiManualMeatGrinder className="w-6 h-6 md:w-8 md:h-8" />,
-      position: { x: 90, y: 10 }
-    }
+      position: { x: 90, y: 10 },
+    },
   ];
 
   const growerComposition = [
     { type: "Small-scale growers", percentage: 70, color: "bg-green-500" },
-    { type: "Medium to commercial", percentage: 30, color: "bg-yellow-500" }
+    { type: "Medium to commercial", percentage: 30, color: "bg-yellow-500" },
   ];
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-50 via-yellow-25 to-white">
       {/* Hero Section with Background */}
       <section className="py-16 md:py-32 relative overflow-hidden">
-        <div 
+        <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{
-            backgroundImage: `url('/farm6.jpg')`
+            backgroundImage: `url('/farm6.jpg')`,
           }}
         />
         <div className="absolute inset-0 bg-gradient-to-r from-green-900/80 via-black/60 to-yellow-900/80" />
-        
+
         <div className="relative max-w-7xl mx-auto px-4 z-10 pt-20">
           <motion.div
             initial={{ opacity: 0, y: 50 }}
@@ -127,21 +146,27 @@ const QualityPage = () => {
                 className="relative bg-white/95 backdrop-blur-sm rounded-sm p-4 md:p-6 text-center shadow-xl hover:shadow-2xl transition-all duration-300 group cursor-pointer overflow-hidden"
               >
                 {/* Background Image */}
-                <div 
+                <div
                   className="absolute inset-0 bg-cover bg-center opacity-20 group-hover:opacity-30 transition-opacity duration-300"
                   style={{ backgroundImage: `url(${metric.bgImage})` }}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
-                
+
                 {/* Content */}
                 <div className="relative z-10">
-                  <div className={`inline-flex p-3 md:p-4 rounded-sm bg-gradient-to-br ${metric.color} text-white mb-3 md:mb-4 group-hover:scale-110 transition-transform`}>
+                  <div
+                    className={`inline-flex p-3 md:p-4 rounded-sm bg-gradient-to-br ${metric.color} text-white mb-3 md:mb-4 group-hover:scale-110 transition-transform`}
+                  >
                     {metric.icon}
                   </div>
-                  <h3 className="gellix-font text-2xl md:text-4xl font-bold text-gray-800 mb-1 md:mb-2">{metric.value}</h3>
-                  <p className="gellix-font text-sm md:text-base text-gray-600 font-medium">{metric.label}</p>
+                  <h3 className="gellix-font text-2xl md:text-4xl font-bold text-gray-800 mb-1 md:mb-2">
+                    {metric.value}
+                  </h3>
+                  <p className="gellix-font text-sm md:text-base text-gray-600 font-medium">
+                    {metric.label}
+                  </p>
                 </div>
-                
+
                 {hoveredStat === index && (
                   <motion.div
                     initial={{ scale: 0 }}
@@ -164,13 +189,20 @@ const QualityPage = () => {
             viewport={{ once: true }}
             className="text-center mb-8 md:mb-16"
           >
-            <h2 className="gellix-font text-3xl md:text-5xl font-bold text-gray-800 mb-4 md:mb-6">Quality Journey</h2>
-            <p className="gellix-font text-lg md:text-xl text-gray-600">Follow our tobacco from field to export</p>
+            <h2 className="gellix-font text-3xl md:text-5xl font-bold text-gray-800 mb-4 md:mb-6">
+              Quality Journey
+            </h2>
+            <p className="gellix-font text-lg md:text-xl text-gray-600">
+              Follow our tobacco from field to export
+            </p>
           </motion.div>
 
           {/* Interactive Process Map */}
           <div className="relative bg-gradient-to-br from-green-50 to-yellow-50 rounded-sm p-4 md:p-8 mb-8 md:mb-16 min-h-64 md:min-h-96">
-            <svg className="absolute inset-0 w-full h-full" viewBox="0 0 100 100">
+            <svg
+              className="absolute inset-0 w-full h-full"
+              viewBox="0 0 100 100"
+            >
               {/* Connecting Lines */}
               <motion.path
                 d="M15,25 Q25,45 35,65 Q55,50 75,45 Q85,25 95,15"
@@ -194,7 +226,10 @@ const QualityPage = () => {
               <motion.div
                 key={stage.id}
                 className="absolute group cursor-pointer"
-                style={{ left: `${stage.position.x}%`, top: `${stage.position.y}%` }}
+                style={{
+                  left: `${stage.position.x}%`,
+                  top: `${stage.position.y}%`,
+                }}
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
                 transition={{ delay: index * 0.3 }}
@@ -205,12 +240,14 @@ const QualityPage = () => {
                     {stage.icon}
                   </div>
                 </div>
-                
+
                 {/* Tooltip */}
                 <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 md:mb-4 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
                   <div className="bg-gray-900 text-white rounded-sm p-2 md:p-3 text-xs md:text-sm whitespace-nowrap shadow-xl max-w-xs">
                     <h4 className="gellix-font font-bold">{stage.title}</h4>
-                    <p className="gellix-font text-gray-300 hidden md:block">{stage.description}</p>
+                    <p className="gellix-font text-gray-300 hidden md:block">
+                      {stage.description}
+                    </p>
                     <div className="absolute top-full left-1/2 transform -translate-x-1/2 border-4 border-transparent border-t-gray-900" />
                   </div>
                 </div>
@@ -231,23 +268,34 @@ const QualityPage = () => {
                   <div className="p-2 md:p-3 bg-white/20 rounded-sm mr-3 md:mr-4">
                     <SiFsecure className="w-6 h-6 md:w-8 md:h-8" />
                   </div>
-                  <h3 className="gellix-font text-2xl md:text-3xl font-bold">Strict Standards</h3>
+                  <h3 className="gellix-font text-2xl md:text-3xl font-bold">
+                    Strict Standards
+                  </h3>
                 </div>
-                
+
                 <p className="gellix-font text-base md:text-lg leading-relaxed mb-4 md:mb-6 text-green-50">
-                  To ensure quality and yield, we provide farmers with premium seeds, fertilizers, pesticides, and comprehensive training on best agricultural practices.
+                  To ensure quality and yield, we provide farmers with premium
+                  seeds, fertilizers, pesticides, and comprehensive training on
+                  best agricultural practices.
                 </p>
-                
+
                 <div className="bg-white/10 backdrop-blur rounded-sm p-4 md:p-6">
                   <h4 className="gellix-font font-bold text-lg md:text-xl mb-3 md:mb-4 flex items-center">
                     <Microscope className="w-5 h-5 md:w-6 md:h-6 mr-2" />
                     Quality Controls
                   </h4>
                   <div className="space-y-2 md:space-y-3">
-                    {['Soil Testing', 'Pest Management', 'Harvest Timing', 'Curing Process'].map((item, idx) => (
+                    {[
+                      "Soil Testing",
+                      "Pest Management",
+                      "Harvest Timing",
+                      "Curing Process",
+                    ].map((item, idx) => (
                       <div key={idx} className="flex items-center">
                         <CheckCircle className="w-4 h-4 md:w-5 md:h-5 mr-2 md:mr-3 text-green-300 flex-shrink-0" />
-                        <span className='gellix-font text-sm md:text-base'>{item}</span>
+                        <span className="gellix-font text-sm md:text-base">
+                          {item}
+                        </span>
                       </div>
                     ))}
                   </div>
@@ -266,13 +314,17 @@ const QualityPage = () => {
                   <div className="p-2 md:p-3 bg-white/20 rounded-sm mr-3 md:mr-4">
                     <LiaAwardSolid className="w-6 h-6 md:w-8 md:h-8" />
                   </div>
-                  <h3 className="gellix-font text-2xl md:text-3xl font-bold">Regular Audits</h3>
+                  <h3 className="gellix-font text-2xl md:text-3xl font-bold">
+                    Regular Audits
+                  </h3>
                 </div>
-                
+
                 <p className="gellix-font text-base md:text-lg leading-relaxed mb-4 md:mb-6 text-yellow-50">
-                  Expert leaf technicians conduct regular training sessions and scheduled visits to ensure environmentally friendly farming methods.
+                  Expert leaf technicians conduct regular training sessions and
+                  scheduled visits to ensure environmentally friendly farming
+                  methods.
                 </p>
-                
+
                 {/* Animated Grower Composition Chart */}
                 <div className="bg-white/10 backdrop-blur rounded-sm p-4 md:p-6">
                   <h4 className="gellix-font font-bold text-lg md:text-xl mb-3 md:mb-4 flex items-center">
@@ -283,8 +335,12 @@ const QualityPage = () => {
                     {growerComposition.map((item, idx) => (
                       <div key={idx} className="space-y-2">
                         <div className="flex justify-between items-center">
-                          <span className="gellix-font text-xs md:text-sm font-medium">{item.type}</span>
-                          <span className="gellix-font text-xl md:text-2xl font-bold">{item.percentage}%</span>
+                          <span className="gellix-font text-xs md:text-sm font-medium">
+                            {item.type}
+                          </span>
+                          <span className="gellix-font text-xl md:text-2xl font-bold">
+                            {item.percentage}%
+                          </span>
                         </div>
                         <div className="w-full bg-white/20 rounded-sm h-2 md:h-3">
                           <motion.div
@@ -315,15 +371,31 @@ const QualityPage = () => {
             viewport={{ once: true }}
             className="text-center mb-8 md:mb-16"
           >
-            <h2 className="gellix-font text-3xl md:text-5xl font-bold mb-4 md:mb-6">Industry Recognition</h2>
-            <p className="gellix-font text-lg md:text-xl opacity-90">Certified excellence in tobacco production</p>
+            <h2 className="gellix-font text-3xl md:text-5xl font-bold mb-4 md:mb-6">
+              Industry Recognition
+            </h2>
+            <p className="gellix-font text-lg md:text-xl opacity-90">
+              Certified excellence in tobacco production
+            </p>
           </motion.div>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
             {[
-              { title: "ISO Certified", desc: "International quality standards", icon: <LiaAwardSolid className="w-8 h-8 md:w-12 md:h-12" /> },
-              { title: "Export Approved", desc: "Global market compliance", icon: <GiWorld className="w-8 h-8 md:w-12 md:h-12" /> },
-              { title: "Sustainable Practices", desc: "Environmental responsibility", icon: <GiLindenLeaf className="w-8 h-8 md:w-12 md:h-12" /> }
+              {
+                title: "ISO Certified",
+                desc: "International quality standards",
+                icon: <LiaAwardSolid className="w-8 h-8 md:w-12 md:h-12" />,
+              },
+              {
+                title: "Export Approved",
+                desc: "Global market compliance",
+                icon: <GiWorld className="w-8 h-8 md:w-12 md:h-12" />,
+              },
+              {
+                title: "Sustainable Practices",
+                desc: "Environmental responsibility",
+                icon: <GiLindenLeaf className="w-8 h-8 md:w-12 md:h-12" />,
+              },
             ].map((cert, index) => (
               <motion.div
                 key={index}
@@ -336,8 +408,12 @@ const QualityPage = () => {
                 <div className="inline-flex p-4 md:p-6 bg-gradient-to-br from-yellow-400 to-amber-500 rounded-sm text-gray-900 mb-4 md:mb-6 group-hover:scale-110 transition-transform shadow-xl">
                   {cert.icon}
                 </div>
-                <h3 className="gellix-font text-xl md:text-2xl font-bold mb-2 md:mb-3">{cert.title}</h3>
-                <p className="gellix-font text-sm md:text-base text-gray-300">{cert.desc}</p>
+                <h3 className="gellix-font text-xl md:text-2xl font-bold mb-2 md:mb-3">
+                  {cert.title}
+                </h3>
+                <p className="gellix-font text-sm md:text-base text-gray-300">
+                  {cert.desc}
+                </p>
               </motion.div>
             ))}
           </div>
@@ -374,6 +450,16 @@ const QualityPage = () => {
           </motion.div>
         </div>
       </section>
+      <motion.button
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.9 }}
+        onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+        className="fixed bottom-8 right-8 w-12 h-12 bg-gradient-to-r from-green-700 to-yellow-300 text-white rounded-full shadow-lg flex items-center justify-center hover:shadow-xl transition z-40"
+      >
+        <FaAngleDoubleUp className="w-4 h-4" />
+      </motion.button>
     </div>
   );
 };

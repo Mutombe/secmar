@@ -28,9 +28,7 @@ import { MdOutlineEmojiTransportation } from "react-icons/md";
 import { SiFsecure } from "react-icons/si";
 import { GiWorld } from "react-icons/gi";
 import { MdContactSupport } from "react-icons/md";
-
-
-
+import { FaAngleDoubleUp } from "react-icons/fa";
 
 const ServicesPage = () => {
   const [activeService, setActiveService] = useState(0);
@@ -123,7 +121,9 @@ const ServicesPage = () => {
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.2 }}
             >
-              <span className="gellix-font text-white drop-shadow-2xl">Our Services</span>
+              <span className="gellix-font text-white drop-shadow-2xl">
+                Our Services
+              </span>
             </motion.h1>
             <motion.p
               className="gellix-font text-2xl text-white/90 max-w-3xl mx-auto drop-shadow-lg"
@@ -292,7 +292,9 @@ const ServicesPage = () => {
                     <ArrowRight className="absolute top-1/2 -right-8 w-6 h-6 text-yellow-400 hidden md:block" />
                   )}
                 </div>
-                <h3 className="gellix-font text-2xl font-bold mb-2">{item.title}</h3>
+                <h3 className="gellix-font text-2xl font-bold mb-2">
+                  {item.title}
+                </h3>
                 <p className="gellix-font opacity-80">{item.desc}</p>
               </motion.div>
             ))}
@@ -331,7 +333,7 @@ const ServicesPage = () => {
                 color: "from-yellow-500 to-amber-600",
               },
               {
-                icon: <MdContactSupport  className="w-16 h-16" />,
+                icon: <MdContactSupport className="w-16 h-16" />,
                 title: "Expert Support",
                 description:
                   "Dedicated agronomy team providing technical guidance and support",
@@ -398,7 +400,9 @@ const ServicesPage = () => {
               </div>
               <div className="flex items-center space-x-2 bg-white/20 backdrop-blur-sm rounded-sm px-6 py-3">
                 <Mail className="w-5 h-5" />
-                <span className="gellix-font">sacrifice@sacmarleaftobacco.co.zw</span>
+                <span className="gellix-font">
+                  sacrifice@sacmarleaftobacco.co.zw
+                </span>
               </div>
             </div>
           </motion.div>
@@ -411,6 +415,16 @@ const ServicesPage = () => {
           <div className="absolute top-1/2 left-1/3 w-16 h-16 bg-white rounded-sm" />
         </div>
       </section>
+      <motion.button
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.9 }}
+        onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+        className="fixed bottom-8 right-8 w-12 h-12 bg-gradient-to-r from-green-700 to-yellow-300 text-white rounded-full shadow-lg flex items-center justify-center hover:shadow-xl transition z-40"
+      >
+        <FaAngleDoubleUp className="w-4 h-4" />
+      </motion.button>
     </div>
   );
 };
