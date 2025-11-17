@@ -5,7 +5,7 @@ import { ChevronRight, ChevronLeft, Menu, X, Phone, Mail, MapPin, Leaf, Award, U
 import { Toaster, toast } from 'sonner';
 import { HiOutlineMenuAlt3 } from "react-icons/hi";
 import { MdOutlineCloseFullscreen } from "react-icons/md";
-import SearchModal from './SearchModal';
+import SearchModal from './searchModal';
 
 
 // Color palette based on your requirements
