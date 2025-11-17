@@ -287,45 +287,6 @@ const Navigation = () => {
               </div>
 
               {/* Footer Section */}
-              <motion.div
-                initial={{ opacity: 0, y: 50 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.6 }}
-                className="px-8 pb-8"
-              >
-                <div className="bg-white/10 backdrop-blur-sm rounded-sm p-6 border border-white/20">
-                  {/* Company Info */}
-                  <div className="text-center mb-4">
-                    <div className="flex items-center justify-center space-x-3 mb-2">
-                      <img src="/logo.png" alt="Logo" className="w-8 h-7" />
-                      <div>
-                        <h3 className="gellix-font text-lg font-bold text-white">SACMAR LEAF</h3>
-                        <p className="gellix-font text-xs text-gray-300 tracking-wider">TOBACCO PVT LTD</p>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Contact Info */}
-                  <div className="grid grid-cols-1 gap-3 text-center">
-                    <div className="flex items-center justify-center space-x-2 text-white/80">
-                      <MapPin className="h-4 w-4" />
-                      <span className="gellix-font text-sm">Premium Tobacco Solutions</span>
-                    </div>
-                  </div>
-
-                  {/* Decorative Elements */}
-                  <div className="mt-4 flex justify-center space-x-4">
-                    <div className="flex items-center space-x-1">
-                      <Leaf className="h-4 w-4 text-green-300" />
-                      <span className="gellix-font text-xs text-white/60">Premium Quality</span>
-                    </div>
-                    <div className="flex items-center space-x-1">
-                      <Award className="h-4 w-4 text-yellow-300" />
-                      <span className="gellix-font text-xs text-white/60">Excellence</span>
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
             </div>
           </motion.div>
         )}
