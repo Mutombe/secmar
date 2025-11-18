@@ -5,6 +5,7 @@ import {
   Route,
   Link,
   useLocation,
+  useNavigate,
 } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import {
@@ -44,7 +45,6 @@ import { GiLindenLeaf } from "react-icons/gi";
 import { HiArrowTrendingUp } from "react-icons/hi2";
 import { IoLogoWhatsapp } from "react-icons/io";
 
-
 import { useInView, useMotionValue, useSpring } from "framer-motion";
 
 export const LazyImage = ({ src, alt, className, style, priority = false }) => {
@@ -68,10 +68,10 @@ export const LazyImage = ({ src, alt, className, style, priority = false }) => {
     <div
       ref={imgRef}
       className={className}
-      style={{ 
-        ...style, 
+      style={{
+        ...style,
         // Remove the position: "relative" - let className handle positioning
-        overflow: "hidden" 
+        overflow: "hidden",
       }}
     >
       {/* Placeholder with blur effect */}
@@ -108,12 +108,12 @@ const HomePage = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [imageLoaded, setImageLoaded] = useState(false);
 
-  const handleProductLearnMore = () => {
-    // route to products page
-    window.location.href = `/services`;
-  };
+  const navigate = useNavigate();
 
-    const handleAction = (action) => {
+  const handleProductLearnMore = (productId) => {
+    navigate(`/products/${productId}`);
+  };
+  const handleAction = (action) => {
     if (action === "call") {
       window.location.href = "tel:+263783411889";
     } else if (action === "email") {
@@ -296,119 +296,127 @@ const HomePage = () => {
         </button>
       </section>
 
-{/* About Company Section - Compact Ad Style */}
-<section className="relative py-16 overflow-hidden">
-  {/* Background Image */}
-  <div className="absolute inset-0">
-    <LazyImage
-      src="/3.jpg"
-      alt="Sacmar Leaf Operations"
-      className="absolute inset-0"
-    />
-    <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-green-900/75 to-black/80" />
-  </div>
-
-  {/* Content */}
-  <div className="relative z-10 max-w-7xl mx-auto px-4">
-    <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
-      {/* Left Content - Compact */}
-      <motion.div
-        initial={{ opacity: 0, x: -30 }}
-        whileInView={{ opacity: 1, x: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6 }}
-        className="flex-1"
-      >
-        <div className="inline-block px-3 py-1 bg-green-500/20 backdrop-blur-sm border border-green-400/30 rounded-sm mb-3">
-          <span className="gellix-font text-green-300 font-semibold tracking-wider text-xs">
-            ABOUT SACMAR LEAF
-          </span>
+      {/* About Company Section - Compact Ad Style */}
+      <section className="relative py-16 overflow-hidden">
+        {/* Background Image */}
+        <div className="absolute inset-0">
+          <LazyImage
+            src="/3.jpg"
+            alt="Sacmar Leaf Operations"
+            className="absolute inset-0"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-green-900/75 to-black/80" />
         </div>
-        
-        <h2 className="gellix-font text-3xl md:text-4xl font-bold text-white mb-3 leading-tight">
-          Leading Zimbabwe's <span className="text-green-400">Tobacco Export</span>
-        </h2>
-        
-        <p className="gellix-font text-base text-gray-200 mb-6 leading-relaxed max-w-2xl">
-          With decades of experience, we bridge local agricultural excellence and global market demands through quality, fair trade, and sustainable farming partnerships.
-        </p>
 
-        {/* Compact Stats */}
-        <div className="flex items-center gap-6 mb-6">
-          {[
-            { icon: GiFarmer, number: "500+", label: "Farmers" },
-            { icon: GiWorld, number: "15+", label: "Countries" },
-            { icon: LiaAwardSolid, number: "25+", label: "Years" }
-          ].map((stat, index) => (
+        {/* Content */}
+        <div className="relative z-10 max-w-7xl mx-auto px-4">
+          <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
+            {/* Left Content - Compact */}
             <motion.div
-              key={index}
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: index * 0.1, duration: 0.4 }}
-              className="flex items-center gap-2"
+              transition={{ duration: 0.6 }}
+              className="flex-1"
             >
-              <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-sm p-2">
-                <stat.icon className="w-5 h-5 text-green-400" />
+              <div className="inline-block px-3 py-1 bg-green-500/20 backdrop-blur-sm border border-green-400/30 rounded-sm mb-3">
+                <span className="gellix-font text-green-300 font-semibold tracking-wider text-xs">
+                  ABOUT SACMAR LEAF
+                </span>
               </div>
-              <div>
-                <div className="gellix-font text-lg font-bold text-white">{stat.number}</div>
-                <div className="gellix-font text-xs text-gray-300">{stat.label}</div>
+
+              <h2 className="gellix-font text-3xl md:text-4xl font-bold text-white mb-3 leading-tight">
+                Leading Zimbabwe's{" "}
+                <span className="text-green-400">Tobacco Export</span>
+              </h2>
+
+              <p className="gellix-font text-base text-gray-200 mb-6 leading-relaxed max-w-2xl">
+                With decades of experience, we bridge local agricultural
+                excellence and global market demands through quality, fair
+                trade, and sustainable farming partnerships.
+              </p>
+
+              {/* Compact Stats */}
+              <div className="flex items-center gap-6 mb-6">
+                {[
+                  { icon: GiFarmer, number: "500+", label: "Farmers" },
+                  { icon: GiWorld, number: "15+", label: "Countries" },
+                  { icon: LiaAwardSolid, number: "25+", label: "Years" },
+                ].map((stat, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.1, duration: 0.4 }}
+                    className="flex items-center gap-2"
+                  >
+                    <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-sm p-2">
+                      <stat.icon className="w-5 h-5 text-green-400" />
+                    </div>
+                    <div>
+                      <div className="gellix-font text-lg font-bold text-white">
+                        {stat.number}
+                      </div>
+                      <div className="gellix-font text-xs text-gray-300">
+                        {stat.label}
+                      </div>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+
+              <Link
+                to="/about"
+                className="gellix-font inline-flex items-center gap-2 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white px-6 py-3 rounded-sm font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-green-500/50"
+              >
+                Discover Our Story
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+            </motion.div>
+
+            {/* Right Content - Glassmorphism Features Grid */}
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="lg:block hidden"
+            >
+              <div className="bg-white/5 backdrop-blur-xl border border-white/20 rounded-sm p-6 shadow-2xl">
+                <div className="grid grid-cols-2 gap-4">
+                  {[
+                    { icon: GiLindenLeaf, title: "Premium Quality" },
+                    { icon: SiFsecure, title: "Fair Trade" },
+                    { icon: HiArrowTrendingUp, title: "Market Access" },
+                    { icon: Sparkles, title: "Innovation" },
+                  ].map((feature, index) => (
+                    <motion.div
+                      key={index}
+                      initial={{ opacity: 0, y: 10 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: index * 0.1, duration: 0.4 }}
+                      className="flex flex-col items-center text-center p-3 bg-white/5 rounded-sm hover:bg-white/10 transition-all duration-300 group cursor-pointer"
+                    >
+                      <feature.icon className="w-8 h-8 text-green-400 mb-2 group-hover:scale-110 transition-transform" />
+                      <h3 className="gellix-font text-white font-semibold text-sm group-hover:text-green-300 transition-colors">
+                        {feature.title}
+                      </h3>
+                    </motion.div>
+                  ))}
+                </div>
               </div>
             </motion.div>
-          ))}
-        </div>
-
-        <Link
-          to="/about"
-          className="gellix-font inline-flex items-center gap-2 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white px-6 py-3 rounded-sm font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-green-500/50"
-        >
-          Discover Our Story
-          <ArrowRight className="w-4 h-4" />
-        </Link>
-      </motion.div>
-
-      {/* Right Content - Glassmorphism Features Grid */}
-      <motion.div
-        initial={{ opacity: 0, x: 30 }}
-        whileInView={{ opacity: 1, x: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6 }}
-        className="lg:block hidden"
-      >
-        <div className="bg-white/5 backdrop-blur-xl border border-white/20 rounded-sm p-6 shadow-2xl">
-          <div className="grid grid-cols-2 gap-4">
-            {[
-              { icon: GiLindenLeaf, title: "Premium Quality" },
-              { icon: SiFsecure, title: "Fair Trade" },
-              { icon: HiArrowTrendingUp, title: "Market Access" },
-              { icon: Sparkles, title: "Innovation" }
-            ].map((feature, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1, duration: 0.4 }}
-                className="flex flex-col items-center text-center p-3 bg-white/5 rounded-sm hover:bg-white/10 transition-all duration-300 group cursor-pointer"
-              >
-                <feature.icon className="w-8 h-8 text-green-400 mb-2 group-hover:scale-110 transition-transform" />
-                <h3 className="gellix-font text-white font-semibold text-sm group-hover:text-green-300 transition-colors">
-                  {feature.title}
-                </h3>
-              </motion.div>
-            ))}
           </div>
         </div>
-      </motion.div>
-    </div>
-  </div>
 
-  {/* Decorative Elements */}
-  <div className="absolute top-10 right-10 w-48 h-48 bg-green-500/10 rounded-full blur-3xl" />
-  <div className="absolute bottom-10 left-10 w-64 h-64 bg-yellow-500/10 rounded-full blur-3xl" />
-</section>
+        {/* Decorative Elements */}
+        <div className="absolute top-10 right-10 w-48 h-48 bg-green-500/10 rounded-full blur-3xl" />
+        <div className="absolute bottom-10 left-10 w-64 h-64 bg-yellow-500/10 rounded-full blur-3xl" />
+      </section>
 
+      {/* Products Section */}
       {/* Products Section */}
       <section className="relative py-24 border-t-4 border-amber-500 overflow-hidden">
         {/* Background Image */}
@@ -443,22 +451,26 @@ const HomePage = () => {
             {[
               {
                 name: "Cut Rug",
+                id: "cut-rug",
                 image: "/rug.png",
                 description:
                   "Expertly cut tobacco meeting international standards",
               },
               {
                 name: "Tobacco Lamina",
+                id: "tobacco-lamina",
                 image: "/lumina.jpeg",
                 description: "Pure tobacco leaf lamina for premium products",
               },
               {
                 name: "Tobacco Stems",
+                id: "tobacco-stems",
                 image: "/stem.png",
                 description: "High-quality stems processed for industrial use",
               },
               {
                 name: "Tobacco Fines",
+                id: "tobacco-fines",
                 image: "/fine.png",
                 description:
                   "Premium fine-grade tobacco for specialized applications",
@@ -471,6 +483,7 @@ const HomePage = () => {
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1, duration: 0.6 }}
                 className="group cursor-pointer"
+                onClick={() => handleProductLearnMore(product.id)}
               >
                 <div className="relative rounded-sm shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-3 h-80">
                   {/* Full Product Image */}
@@ -519,8 +532,7 @@ const HomePage = () => {
                     </div>
 
                     {/* Learn More Button */}
-                    <button className="gellix-font w-full bg-white/30 hover:bg-white text-gray-900 py-3 rounded-sm font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg"
-                    onClick={handleProductLearnMore}>
+                    <button className="gellix-font w-full bg-white/30 hover:bg-white text-gray-900 py-3 rounded-sm font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg">
                       Learn More
                     </button>
                   </div>
@@ -534,7 +546,7 @@ const HomePage = () => {
         </div>
       </section>
 
-            {/* Floating Action Elements */}
+      {/* Floating Action Elements */}
       <div className="fixed bottom-6 right-6 z-50 flex flex-col gap-3">
         <button
           className="group bg-gradient-to-r from-green-600 to-green-700 hover:bg-green-300 text-white p-3 rounded-full shadow-2xl transform hover:scale-110 transition-all duration-300"

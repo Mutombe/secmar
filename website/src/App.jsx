@@ -10,7 +10,7 @@ import { Toaster, toast } from "sonner";
 import Navigation from "./components/nav";
 import HomePage from "./components/home";
 import AboutPage from "./components/about";
-import ProductsPage from "./components/products";
+import ProductDetail from "./components/products";
 import ServicesPage from "./components/service";
 import QualityPage from "./components/quality";
 import ContactPage from "./components/contact";
@@ -253,6 +253,9 @@ const AppContent = () => {
           <Route path="/" element={<HomePage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/services" element={<ServicesPage />} />
+
+          {/* Generic product route */}
+          <Route path="/products/:productId" element={<ProductDetail />} />
           <Route path="/quality" element={<QualityPage />} />
           <Route path="/gallery" element={<GalleryPage />} />
           <Route path="/contact" element={<ContactPage />} />
