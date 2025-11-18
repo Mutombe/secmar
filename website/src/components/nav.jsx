@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronRight, ChevronLeft, Menu, X, Phone, Mail, MapPin, Leaf, Award, Users, Globe, CheckCircle, ArrowRight, Sun, Droplet, TrendingUp, Package, Shield, Sparkles, Home, Info, Settings, Image, Contact, Clock, Linkedin, MessageCircle, Search } from 'lucide-react';
+import { ChevronRight, ChevronLeft, Menu, X, Phone, Mail, MapPin,Newspaper ,Leaf, Award, Users, Globe, CheckCircle, ArrowRight, Sun, Droplet, TrendingUp, Package, Shield, Sparkles, Home, Info, Settings, Image, Contact, Clock, Linkedin, MessageCircle, Search } from 'lucide-react';
 import { Toaster, toast } from 'sonner';
 import { HiOutlineMenuAlt3 } from "react-icons/hi";
 import { MdOutlineCloseFullscreen } from "react-icons/md";
@@ -30,7 +30,7 @@ const Navigation = () => {
     { path: '/services', label: 'Services', icon: Settings },
     { path: '/quality', label: 'Quality', icon: Award },
     { path: '/gallery', label: 'Gallery', icon: Image },
-    { path: '/news', label: 'News', icon: Image },
+    { path: '/news', label: 'News', icon: Newspaper },
     { path: '/contact', label: 'Contact', icon: Contact },
   ];
 

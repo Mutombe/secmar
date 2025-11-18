@@ -247,7 +247,7 @@ const NewsPage = () => {
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
       {/* Hero Section with Featured News */}
       {featuredNews && (
-        <section className="relative h-[70vh] overflow-hidden">
+        <section className="relative h-screen overflow-hidden pt-16">
           <LazyImage
             src={featuredNews.image}
             alt={featuredNews.title}
