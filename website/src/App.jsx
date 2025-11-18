@@ -14,6 +14,7 @@ import ProductDetail from "./components/products";
 import ServicesPage from "./components/service";
 import QualityPage from "./components/quality";
 import ContactPage from "./components/contact";
+import NewsPage from "./components/news";
 import Footer from "./components/footer";
 import { motion, AnimatePresence } from "framer-motion";
 import { preloadImages } from "./utils";
@@ -258,6 +259,7 @@ const AppContent = () => {
           <Route path="/products/:productId" element={<ProductDetail />} />
           <Route path="/quality" element={<QualityPage />} />
           <Route path="/gallery" element={<GalleryPage />} />
+          <Route path="/news" element={<NewsPage />} />
           <Route path="/contact" element={<ContactPage />} />
         </Routes>
         <Footer />
