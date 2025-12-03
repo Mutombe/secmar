@@ -53,7 +53,7 @@ const LoadingScreen = () => {
         >
           {/* Actual Logo Image */}
           <img
-            src="/logo.png"
+            src="/c-logo.png"
             alt="Sacmar Leaf Tobacco Logo"
             className="h-32 w-auto object-contain"
           />

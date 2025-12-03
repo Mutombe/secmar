@@ -133,7 +133,7 @@ const Navigation = () => {
                 className="flex items-center space-x-3"
               >
                 <div className="relative">
-                  <img src="/logo.png" alt="Logo" className="w-12 h-10" />
+                  <img src="/c-logo.png" alt="Logo" className="w-12 h-10" />
                 </div>
                 <div>
                   <h1 className="gellix-font text-xl font-bold bg-gradient-to-r from-green-700 to-yellow-600 bg-clip-text text-transparent">SACMAR LEAF</h1>
