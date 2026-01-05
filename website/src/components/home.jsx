@@ -11,32 +11,20 @@ import { motion, AnimatePresence } from "framer-motion";
 import {
   ChevronRight,
   ChevronLeft,
-  Menu,
-  X,
   Phone,
   Mail,
   MapPin,
-  Leaf,
   Award,
-  Users,
-  Globe,
-  CheckCircle,
   ArrowRight,
   Linkedin,
-  Sun,
-  Droplet,
-  TrendingUp,
-  Package,
-  Shield,
   Sparkles,
   Briefcase,
   Building,
+  CheckCircle,
+  Globe,
 } from "lucide-react";
-import { Toaster, toast } from "sonner";
 import { SiFsecure } from "react-icons/si";
 import { RiGlobalFill } from "react-icons/ri";
-import { AiOutlineGlobal } from "react-icons/ai";
-import { LiaPeopleCarrySolid } from "react-icons/lia";
 import { FaPeopleCarry } from "react-icons/fa";
 import { GiFarmer } from "react-icons/gi";
 import { GiWorld } from "react-icons/gi";
@@ -45,36 +33,39 @@ import { GiLindenLeaf } from "react-icons/gi";
 import { HiArrowTrendingUp } from "react-icons/hi2";
 import { IoLogoWhatsapp } from "react-icons/io";
 
-import { useInView, useMotionValue, useSpring } from "framer-motion";
-
+// --- LazyImage Component (Unchanged) ---
 export const LazyImage = ({ src, alt, className, style, priority = false }) => {
   const [imageSrc, setImageSrc] = useState(null);
   const [imageLoaded, setImageLoaded] = useState(false);
   const imgRef = useRef();
-  const isInView = useInView(imgRef, { once: true, margin: "50px" });
-
+  
+  // Simple check for intersection
   useEffect(() => {
-    if (priority || isInView) {
-      const img = new Image();
-      img.src = src;
-      img.onload = () => {
-        setImageSrc(src);
-        setImageLoaded(true);
-      };
-    }
-  }, [src, isInView, priority]);
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting || priority) {
+          const img = new Image();
+          img.src = src;
+          img.onload = () => {
+            setImageSrc(src);
+            setImageLoaded(true);
+          };
+          if (imgRef.current) observer.unobserve(imgRef.current);
+        }
+      },
+      { rootMargin: "50px" }
+    );
+
+    if (imgRef.current) observer.observe(imgRef.current);
+    return () => observer.disconnect();
+  }, [src, priority]);
 
   return (
     <div
       ref={imgRef}
       className={className}
-      style={{
-        ...style,
-        // Remove the position: "relative" - let className handle positioning
-        overflow: "hidden",
-      }}
+      style={{ ...style, overflow: "hidden" }}
     >
-      {/* Placeholder with blur effect */}
       <div
         style={{
           position: "absolute",
@@ -97,7 +88,6 @@ export const LazyImage = ({ src, alt, className, style, priority = false }) => {
             opacity: imageLoaded ? 1 : 0,
             transition: "opacity 0.3s ease",
           }}
-          onLoad={() => setImageLoaded(true)}
         />
       )}
     </div>
@@ -107,12 +97,12 @@ export const LazyImage = ({ src, alt, className, style, priority = false }) => {
 const HomePage = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [imageLoaded, setImageLoaded] = useState(false);
-
   const navigate = useNavigate();
 
   const handleProductLearnMore = (productId) => {
     navigate(`/products/${productId}`);
   };
+
   const handleAction = (action) => {
     if (action === "call") {
       window.location.href = "tel:+263783411889";
@@ -124,24 +114,35 @@ const HomePage = () => {
     }
   };
 
+  // --- UPDATED SLIDER DATA BASED ON YOUR TEXT ---
+  // I broke your statement into 3 digestable slides for the UI
   const slides = [
     {
-      title: "Welcome to Sacmar Leaf",
-      subtitle: "Contracting Farmers and Export Excellence",
-      image: "/7.jpg",
-      gradient: "from-green-900/80 to-yellow-900/60",
+      id: 1,
+      tagline: "Premium Zimbabwe Origin",
+      title: "FCV Cut Rag & Lamina",
+      description: "Sacmar Leaf Tobacco supplies premium Zimbabwe-origin FCV Cut Rag and FCV Lamina, offering customised blends and worldwide shipping.",
+      bgImage: "/7.jpg", // Background texture
+      productImage: "/rug.png", // The specific product image
+      color: "from-amber-600 to-yellow-500",
     },
     {
-      title: "Ensuring Quality Tobacco Production",
-      subtitle: "Premium Standards in Every Harvest",
-      image: "/3.jpg",
-      gradient: "from-yellow-900/80 to-green-900/60",
+      id: 2,
+      tagline: "Crafted for Preferences",
+      title: "Customised Tobacco Blends",
+      description: "Our blends are crafted to meet diverse nicotine profiles and sensory preferences, serving low-end, mid-range, and premium markets.",
+      bgImage: "/3.jpg",
+      productImage: "/lumina.jpeg", 
+      color: "from-green-600 to-emerald-500",
     },
     {
-      title: "Nesting is Illegal",
-      subtitle: "Pure tobacco, no foreign matter - our commitment to quality",
-      image: "/12.jpg",
-      gradient: "from-amber-900/80 to-green-900/60",
+      id: 3,
+      tagline: "Consistent Quality",
+      title: "Balanced Taste Profiles",
+      description: "We ensure every consumer experiences their preferred taste through carefully balanced blends ranging from low to high nicotine with consistent flavor.",
+      bgImage: "/12.jpg",
+      productImage: "/stem.png", 
+      color: "from-orange-600 to-red-500",
     },
   ];
 
@@ -151,8 +152,7 @@ const HomePage = () => {
       position: "Managing Director",
       image: "l1.jpg",
       location: "Harare, Zimbabwe",
-      description:
-        "Leading agricultural innovation and farmer partnerships across Zimbabwe",
+      description: "Leading agricultural innovation and farmer partnerships across Zimbabwe",
       phone: "+263 77 123 4567",
       linkedin: "https://linkedin.com/in/sacrifice-mariga",
     },
@@ -161,140 +161,183 @@ const HomePage = () => {
       position: "Indonesian Representative",
       image: "l3.jpeg",
       location: "Jakarta, Indonesia",
-      description:
-        "Managing Southeast Asian markets and international trade relations",
+      description: "Managing Southeast Asian markets and international trade relations",
       phone: "+62 812 3456 7890",
       linkedin: "https://linkedin.com/in/arief-yulianto",
     },
   ];
+
+  // Auto-advance slider
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length);
-    }, 5000);
+    }, 8000); // Increased time slightly for reading
     return () => clearInterval(timer);
-  }, []);
+  }, [slides.length]);
 
   return (
     <div className="min-h-screen">
-      {/* Hero Carousel with Crossfade */}
-      <section className="relative h-screen overflow-hidden bg-gray-900">
-        {/* Background Images Stack */}
-        {/* Background Images Stack */}
-        <div className="absolute inset-0">
-          {slides.map((slide, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: index === 0 ? 1 : 0 }}
-              animate={{
-                opacity: currentSlide === index ? 1 : 0,
-                scale: currentSlide === index ? 1 : 1.05,
-              }}
-              transition={{
-                duration: 1.2,
-                ease: "easeInOut",
-              }}
-              className="absolute inset-0"
-            >
-              <LazyImage
-                src={slide.image}
-                alt={slide.title}
+      
+      {/* --- NEW PRODUCT-FOCUSED HERO SECTION --- */}
+      <section className="relative h-screen min-h-[700px] overflow-hidden bg-gray-900">
+        
+        {/* 1. Dynamic Background Layer (Darkened) */}
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={`bg-${currentSlide}`}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 0.4 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 1.5 }}
+            className="absolute inset-0 z-0"
+          >
+             <LazyImage
+                src={slides[currentSlide].bgImage}
+                alt="Background"
                 className="absolute inset-0"
-                priority={index === 0}
+                style={{ filter: "grayscale(60%) contrast(120%)" }}
+                priority={true}
               />
-              <div
-                className={`absolute inset-0 bg-gradient-to-br ${slide.gradient}`}
-              />
-            </motion.div>
-          ))}
-        </div>
+          </motion.div>
+        </AnimatePresence>
+        
+        {/* Dark Overlay for text readability */}
+        <div className="absolute inset-0 bg-gradient-to-r from-gray-950 via-gray-900/90 to-gray-900/40 z-10" />
 
-        {/* Content */}
-        <div className="relative h-full flex items-center text-white z-10">
-          <div className="max-w-7xl mx-auto px-8 md:px-12 w-full">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={currentSlide}
-                initial={{ x: -50, opacity: 0 }}
-                animate={{ x: 0, opacity: 1 }}
-                exit={{ x: 50, opacity: 0 }}
-                transition={{ duration: 0.8, ease: "easeOut" }}
-                className="max-w-2xl"
-              >
-                <h1 className="gellix-font text-5xl md:text-7xl font-bold mb-6 drop-shadow-2xl">
-                  {slides[currentSlide].title.split(" ").slice(0, -2).join(" ")}{" "}
-                  <span className="text-green-400">
-                    {slides[currentSlide].title.split(" ").slice(-2).join(" ")}
-                  </span>
-                </h1>
-                <p className="gellix-font text-xl md:text-2xl drop-shadow-lg mb-8">
-                  {slides[currentSlide].subtitle.split(",")[0]},{" "}
-                  <span className="text-green-400">
-                    {slides[currentSlide].subtitle.split(",")[1] ||
-                      slides[currentSlide].subtitle
-                        .split(" ")
-                        .slice(-2)
-                        .join(" ")}
-                  </span>
-                </p>
-
-                {/* Action Buttons */}
+        {/* 2. Main Content Grid */}
+        <div className="gellix-font relative z-20 h-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col lg:flex-row h-full items-center justify-center lg:justify-between gap-12 pt-20">
+            
+            {/* LEFT: Text Content */}
+            <div className="w-full lg:w-1/2 flex flex-col justify-center items-start space-y-6">
+              <AnimatePresence mode="wait">
                 <motion.div
-                  initial={{ y: 20, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  transition={{ delay: 0.3, duration: 0.6 }}
-                  className="flex flex-wrap gap-4"
+                  key={`text-${currentSlide}`}
+                  initial={{ opacity: 0, x: -50 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: 50 }}
+                  transition={{ duration: 0.6, ease: "easeOut" }}
+                  className="space-y-6"
                 >
-                  <Link
-                    to="/about"
-                    className="gellix-font bg-green-500 hover:bg-green-600 text-white px-8 py-4 rounded-sm font-semibold flex items-center gap-2 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-green-500/50"
-                  >
-                    Learn More
-                    <ArrowRight className="w-5 h-5" />
-                  </Link>
-                  <Link
-                    to="/contact"
-                    className="gellix-font bg-white/10 backdrop-blur-md hover:bg-white/20 text-white px-8 py-4 rounded-sm font-semibold border-2 border-white/30 transition-all duration-300 transform hover:scale-105"
-                  >
-                    Contact Us
-                  </Link>
+                  {/* Tagline Badge */}
+                  <div className={`inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/20 bg-white/5 backdrop-blur-md`}>
+                    <div className={`w-2 h-2 rounded-full bg-gradient-to-r ${slides[currentSlide].color} animate-pulse`} />
+                    <span className="text-sm font-semibold text-gray-200 uppercase">
+                      {slides[currentSlide].tagline}
+                    </span>
+                  </div>
+
+                  {/* Main Title */}
+                  <h1 className="text-5xl md:text-7xl font-bold text-white leading-tight">
+                    {slides[currentSlide].title.split(" ").slice(0, -1).join(" ")}{" "}
+                    <span className={`text-transparent bg-clip-text bg-gradient-to-r ${slides[currentSlide].color}`}>
+                      {slides[currentSlide].title.split(" ").pop()}
+                    </span>
+                  </h1>
+
+                  {/* Description from your text */}
+                  <p className="text-lg md:text-xl text-gray-300 max-w-xl leading-relaxed border-l-4 border-amber-500/50 pl-6">
+                    {slides[currentSlide].description}
+                  </p>
+
+                  {/* CTA Buttons */}
+                  <div className="flex flex-wrap gap-4 pt-4">
+                    <Link
+                      to="/products"
+                      className={`px-8 py-4 rounded-sm font-bold text-white bg-gradient-to-r ${slides[currentSlide].color} hover:shadow-lg hover:shadow-amber-500/20 transition-all transform hover:-translate-y-1 flex items-center gap-2`}
+                    >
+                      View Products
+                      <ArrowRight className="w-5 h-5" />
+                    </Link>
+                    <button 
+                      onClick={() => handleAction("whatsapp")}
+                      className="px-8 py-4 rounded-sm font-bold text-white border border-white/30 hover:bg-white/10 backdrop-blur-sm transition-all flex items-center gap-2"
+                    >
+                      Inquire Now
+                    </button>
+                  </div>
                 </motion.div>
-              </motion.div>
-            </AnimatePresence>
+              </AnimatePresence>
+            </div>
+
+            {/* RIGHT: Product Image Showcase */}
+            <div className="w-full lg:w-1/2 flex justify-center lg:justify-end relative">
+               <AnimatePresence mode="wait">
+                <motion.div
+                  key={`img-${currentSlide}`}
+                  initial={{ opacity: 0, scale: 0.8, rotate: -5 }}
+                  animate={{ 
+                    opacity: 1, 
+                    scale: 1, 
+                    rotate: 0,
+                    y: [0, -20, 0] // Floating animation
+                  }}
+                  exit={{ opacity: 0, scale: 0.9, rotate: 5 }}
+                  transition={{ 
+                    opacity: { duration: 0.5 },
+                    scale: { duration: 0.5 },
+                    y: { repeat: Infinity, duration: 4, ease: "easeInOut" }
+                  }}
+                  className="relative"
+                >
+                  {/* Glass Card Behind Image */}
+                  <div className="absolute inset-0 bg-white/5 backdrop-blur-2xl rounded-full transform rotate-6 scale-90 blur-xl"></div>
+                  
+                  {/* Circle decoration */}
+                  <div className={`absolute -inset-10 rounded-full bg-gradient-to-r ${slides[currentSlide].color} opacity-20 blur-3xl animate-pulse`}></div>
+
+                  {/* The Product Image */}
+                  <div className="relative w-[350px] h-[350px] md:w-[500px] md:h-[500px]">
+                    <img 
+                      src={slides[currentSlide].productImage} 
+                      alt={slides[currentSlide].title}
+                      className="w-full h-full object-contain drop-shadow-2xl"
+                    />
+                  </div>
+
+                  {/* Floating Stat Card */}
+                  <motion.div 
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.5 }}
+                    className="absolute -bottom-4 -left-4 md:left-0 bg-white/10 backdrop-blur-xl border border-white/20 p-4 rounded-lg shadow-2xl"
+                  >
+                    <div className="flex items-center gap-3">
+                      <div className="bg-green-500/20 p-2 rounded-full">
+                        <GiLindenLeaf className="w-6 h-6 text-green-400" />
+                      </div>
+                      <div>
+                        <p className="text-xs text-gray-300 uppercase tracking-wide">Quality Grade</p>
+                        <p className="text-white font-bold text-lg">Export Premium</p>
+                      </div>
+                    </div>
+                  </motion.div>
+
+                </motion.div>
+               </AnimatePresence>
+            </div>
+
           </div>
         </div>
 
-        {/* Carousel Navigation */}
-        <div className="absolute bottom-10 left-0 right-0 flex justify-center space-x-3 z-20">
+        {/* Carousel Navigation Dots */}
+        <div className="absolute bottom-10 left-0 right-0 flex justify-center gap-3 z-30">
           {slides.map((_, index) => (
             <button
               key={index}
               onClick={() => setCurrentSlide(index)}
-              className={`h-3 transition-all duration-500 ${
+              className={`h-2 rounded-full transition-all duration-500 ${
                 index === currentSlide
-                  ? "w-12 bg-yellow-400 shadow-lg shadow-yellow-400/30"
-                  : "w-3 bg-white/40 hover:bg-white/60"
-              } rounded-full backdrop-blur-sm`}
+                  ? "w-10 bg-amber-500"
+                  : "w-2 bg-gray-600 hover:bg-gray-400"
+              }`}
             />
           ))}
         </div>
-
-        <button
-          onClick={() =>
-            setCurrentSlide(
-              (prev) => (prev - 1 + slides.length) % slides.length
-            )
-          }
-          className="absolute hidden sm:block left-5 top-1/2 -translate-y-1/2 bg-black/20 backdrop-blur-md p-3 rounded-full hover:bg-black/30 transition-all duration-300 z-20 border border-white/20"
-        >
-          <ChevronLeft className="w-6 h-6 text-white" />
-        </button>
-        <button
-          onClick={() => setCurrentSlide((prev) => (prev + 1) % slides.length)}
-          className="absolute hidden sm:block right-5 top-1/2 -translate-y-1/2 bg-black/20 backdrop-blur-md p-3 rounded-full hover:bg-black/30 transition-all duration-300 z-20 border border-white/20"
-        >
-          <ChevronRight className="w-6 h-6 text-white" />
-        </button>
       </section>
+
+      {/* --- END HERO SECTION --- */}
+
 
       {/* About Company Section - Compact Ad Style */}
       <section className="relative py-16 overflow-hidden">
@@ -416,7 +459,6 @@ const HomePage = () => {
         <div className="absolute bottom-10 left-10 w-64 h-64 bg-yellow-500/10 rounded-full blur-3xl" />
       </section>
 
-      {/* Products Section */}
       {/* Products Section */}
       <section className="relative py-24 border-t-4 border-amber-500 overflow-hidden">
         {/* Background Image */}
@@ -639,11 +681,9 @@ const HomePage = () => {
                     </div>
 
                     {/* Professional Footer */}
-                    {/* Professional Footer */}
                     <div className="bg-gradient-to-r from-green-50 to-yellow-50 px-6 py-4 border-t border-gray-100">
                       <div className="flex items-center justify-center gap-4">
                         {/* Phone */}
-
                         <a
                           href={`tel:${director.phone}`}
                           className="group flex items-center gap-2 bg-white px-4 py-2 rounded-sm hover:bg-green-50 transition-all duration-300 shadow-sm hover:shadow-md"
@@ -656,7 +696,6 @@ const HomePage = () => {
                         </a>
 
                         {/* LinkedIn */}
-
                         <a
                           href={director.linkedin}
                           target="_blank"
