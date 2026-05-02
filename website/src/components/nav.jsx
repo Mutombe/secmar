@@ -111,11 +111,11 @@ const Navigation = () => {
 
               {/* Email */}
               <a 
-                href="mailto:info@sacmarleaf.co.zw" 
+                href="mailto:info@sacmarleaftobacco.co.zw" 
                 className="hidden sm:flex items-center space-x-2 hover:text-yellow-300 transition-colors duration-300"
               >
                 <Mail className="h-4 w-4" />
-                <span className="gellix-font hidden lg:inline">info@sacmarleaf.co.zw</span>
+                <span className="gellix-font hidden lg:inline">info@sacmarleaftobacco.co.zw</span>
               </a>
             </div>
           </div>

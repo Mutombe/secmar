@@ -150,7 +150,7 @@ const ContactPage = () => {
     {
       icon: Mail,
       title: "Email Us",
-      details: ["info@sacmarleaf.co.zw"],
+      details: ["info@sacmarleaftobacco.co.zw"],
       color: "from-yellow-500 to-orange-600",
     },
     {

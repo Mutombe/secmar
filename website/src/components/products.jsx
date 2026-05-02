@@ -330,7 +330,7 @@ const ProductDetail = () => {
     if (action === "call") {
       window.location.href = "tel:+263783411889";
     } else if (action === "email") {
-      window.location.href = `mailto:info@sacmarleaf.co.zw?subject=Inquiry about ${productName}`;
+      window.location.href = `mailto:info@sacmarleaftobacco.co.zw?subject=Inquiry about ${productName}`;
     } else if (action === "whatsapp") {
       window.location.href = `https://wa.me/263783411889?text=Hello%20Sacmar%20Leaf%2C%20I%20would%20like%20to%20inquire%20about%20${productName}.`;
     }

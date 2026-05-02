@@ -133,8 +133,8 @@ const SearchModal = ({ isOpen, onClose }) => {
       isExternal: true
     },
     {
-      title: 'Email: info@sacmarleaf.co.zw',
-      path: 'mailto:info@sacmarleaf.co.zw',
+      title: 'Email: info@sacmarleaftobacco.co.zw',
+      path: 'mailto:info@sacmarleaftobacco.co.zw',
       description: 'Send us an email',
       keywords: ['email', 'mail', 'contact', 'reach', 'info'],
       category: 'Contact',
