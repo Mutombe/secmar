@@ -162,7 +162,7 @@ const HomePage = () => {
       image: "l3.jpeg",
       location: "Jakarta, Indonesia",
       description: "Managing Southeast Asian markets and international trade relations",
-      phone: "+62 812 3456 7890",
+      phone: "+62811-277-209",
       linkedin: "https://linkedin.com/in/arief-yulianto",
     },
   ];
