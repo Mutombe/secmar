@@ -441,7 +441,7 @@ const QualityPage = () => {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <div className="gellix-font flex items-center space-x-2 bg-white/20 backdrop-blur-sm rounded-sm px-4 md:px-6 py-2 md:py-3 text-sm md:text-base">
-                <span>+263719411889</span>
+                <span>+263783411889</span>
               </div>
               <div className="gellix-font flex items-center space-x-2 bg-white/20 backdrop-blur-sm rounded-sm px-4 md:px-6 py-2 md:py-3 text-sm md:text-base break-all">
                 <span>sacrifice@sacmarleaftobacco.co.zw</span>

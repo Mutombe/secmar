@@ -59,14 +59,14 @@ const ContactPage = () => {
         mapRef.current.style.position = "relative";
         mapRef.current.style.zIndex = "1";
 
-        // Harare coordinates
+        // Belgravia, Harare coordinates
         const map = window.L.map(mapRef.current, {
           zoomControl: true,
           scrollWheelZoom: true,
           // Ensure map doesn't interfere with other interactions
           boxZoom: false,
           doubleClickZoom: false,
-        }).setView([-17.8508592, 30.8466406], 13);
+        }).setView([-17.8092, 31.0403], 15);
 
         // Custom brown-yellow tile layer
         window.L.tileLayer(
@@ -87,12 +87,12 @@ const ContactPage = () => {
         });
 
         // Add marker
-        window.L.marker([-17.8508592, 30.8466406], { icon: customIcon }).addTo(
+        window.L.marker([-17.8092, 31.0403], { icon: customIcon }).addTo(
           map
         ).bindPopup(`
           <div class="p-3 text-center">
             <h3 class="gellix-font font-bold text-gray-800 mb-2">Sacmar Leaf Tobacco</h3>
-            <p class="gellix-font text-sm text-gray-600">14776 Chawara Road, Off Coventry<br>Harare, Zimbabwe</p>
+            <p class="gellix-font text-sm text-gray-600">Unit 12, 6 Chelmsford Road<br>Belgravia, Harare</p>
           </div>
         `);
 
@@ -156,7 +156,7 @@ const ContactPage = () => {
     {
       icon: MapPin,
       title: "Visit Us",
-      details: ["960 Hungardown Road", "Glen Lorne, Harare"],
+      details: ["Unit 12, 6 Chelmsford Road", "Belgravia, Harare"],
       color: "from-orange-500 to-red-600",
     },
     {
@@ -411,7 +411,7 @@ const ContactPage = () => {
                           Find Us Here
                         </h3>
                         <p className="gellix-font text-sm sm:text-base text-green-100">
-                          Harare, Zimbabwe
+                          Belgravia, Harare
                         </p>
                       </div>
                     </div>

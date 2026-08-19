@@ -141,10 +141,10 @@ const SearchModal = ({ isOpen, onClose }) => {
       isExternal: true
     },
     {
-      title: 'Location: Glen Lorne, Harare',
+      title: 'Location: Belgravia, Harare',
       path: '/contact',
-      description: '960 Hungardown Road, Glen Lorne, Harare',
-      keywords: ['location', 'address', 'harare', 'zimbabwe', 'office', 'glen lorne'],
+      description: 'Unit 12, 6 Chelmsford Road, Belgravia, Harare',
+      keywords: ['location', 'address', 'harare', 'zimbabwe', 'office', 'belgravia', 'chelmsford'],
       category: 'Location'
     },
     {

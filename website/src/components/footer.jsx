@@ -121,6 +121,9 @@ const Footer = () => {
                 <p className="gellix-font text-xs text-gray-400">TOBACCO PVT LTD</p>
               </div>
             </div>
+            <p className="gellix-font text-green-400 text-sm font-semibold italic mb-2">
+              Premium Leaf, Global Trust.
+            </p>
             <p className="gellix-font text-gray-400 text-sm leading-relaxed">
               Premium tobacco contracting and export services in Zimbabwe
             </p>
@@ -163,7 +166,7 @@ const Footer = () => {
               </li>
               <li className="flex items-start space-x-2">
                 <MapPin className="w-4 h-4 mt-1" />
-                <span className='gellix-font'>960 Hungardown Road, Glen Lorne, Harare</span>
+                <span className='gellix-font'>Unit 12, 6 Chelmsford Road, Belgravia, Harare</span>
               </li>
             </ul>
           </div>

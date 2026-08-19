@@ -396,7 +396,7 @@ const ServicesPage = () => {
             <div className="flex flex-col md:flex-row gap-4 justify-center items-center">
               <div className="flex items-center space-x-2 bg-white/20 backdrop-blur-sm rounded-sm px-6 py-3">
                 <Phone className="w-5 h-5" />
-                <span className="gellix-font">+263719411889</span>
+                <span className="gellix-font">+263783411889</span>
               </div>
               <div className="flex items-center space-x-2 bg-white/20 backdrop-blur-sm rounded-sm px-6 py-3">
                 <Mail className="w-5 h-5" />
