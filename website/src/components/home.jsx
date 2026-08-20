@@ -179,7 +179,7 @@ const HomePage = () => {
     <div className="min-h-screen">
       
       {/* --- NEW PRODUCT-FOCUSED HERO SECTION --- */}
-      <section className="relative h-screen min-h-[700px] overflow-hidden bg-gray-900">
+      <section className="relative min-h-screen overflow-hidden bg-gray-900">
         
         {/* 1. Dynamic Background Layer (Darkened) */}
         <AnimatePresence mode="wait">
@@ -205,8 +205,9 @@ const HomePage = () => {
         <div className="absolute inset-0 bg-gradient-to-r from-gray-950 via-gray-900/90 to-gray-900/40 z-10" />
 
         {/* 2. Main Content Grid */}
-        <div className="gellix-font relative z-20 h-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col lg:flex-row h-full items-center justify-center lg:justify-between gap-12 pt-20">
+        <div className="gellix-font relative z-20 min-h-screen max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Top padding clears the fixed top-bar + nav (≈112px mobile / 120px sm) so content never sinks under the nav */}
+          <div className="flex flex-col lg:flex-row min-h-screen items-center justify-center lg:justify-between gap-12 pt-32 sm:pt-36 lg:pt-24 pb-16 lg:pb-0">
             
             {/* LEFT: Text Content */}
             <div className="w-full lg:w-1/2 flex flex-col justify-center items-start space-y-6">
@@ -639,20 +640,19 @@ const HomePage = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.15, duration: 0.6 }}
-                  className="group"
+                  className="group h-full"
                 >
-                  <div className="bg-white rounded-sm shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 h-[500px] flex flex-col">
+                  <div className="bg-white rounded-sm shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 h-full flex flex-col">
                     {/* Professional Header */}
                     <div className="h-2 bg-gradient-to-r from-green-600 to-yellow-500" />
 
-                    {/* Profile Image - Top Half */}
-                    <div className="relative h-1/2 overflow-hidden">
+                    {/* Profile Image - full portrait, object-contain so the whole figure is always visible (never cropped by the card body) */}
+                    <div className="relative h-96 overflow-hidden bg-gradient-to-b from-gray-100 to-gray-200 flex items-end justify-center">
                       <img
                         src={director.image}
                         alt={director.name}
-                        className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                        className="w-full h-full object-contain object-bottom group-hover:scale-105 transition-transform duration-500"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
                     </div>
 
                     {/* Content - Bottom Half */}
