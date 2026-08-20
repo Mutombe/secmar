@@ -642,57 +642,58 @@ const HomePage = () => {
                   transition={{ delay: index * 0.15, duration: 0.6 }}
                   className="group h-full"
                 >
-                  <div className="bg-white rounded-sm shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 h-full flex flex-col">
-                    {/* Professional Header */}
-                    <div className="h-2 bg-gradient-to-r from-green-600 to-yellow-500" />
-
-                    {/* Profile Image - full portrait, object-contain so the whole figure is always visible (never cropped by the card body) */}
-                    <div className="relative h-96 overflow-hidden bg-gradient-to-b from-gray-100 to-gray-200 flex items-end justify-center">
+                  <div className="relative bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 h-full flex flex-col border border-gray-100">
+                    {/* Profile Image - consistent 3:4 portrait frame.
+                        object-cover object-top: Mariga's 0.77 portrait keeps full height (~2% side crop),
+                        Arief's square crops to a clean head-and-shoulders. Name overlays a gradient so the
+                        two photos' different backgrounds read as one cohesive set. */}
+                    <div className="relative aspect-[3/4] overflow-hidden bg-gradient-to-b from-gray-100 to-gray-200">
                       <img
                         src={director.image}
                         alt={director.name}
-                        className="w-full h-full object-contain object-bottom group-hover:scale-105 transition-transform duration-500"
+                        className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700"
                       />
-                    </div>
-
-                    {/* Content - Bottom Half */}
-                    <div className="flex-1 p-6 flex flex-col justify-between">
-                      {/* Name & Title */}
-                      <div className="text-center">
-                        <h3 className="gellix-font text-2xl font-bold text-gray-900 mb-2 group-hover:text-green-700 transition-colors">
+                      {/* Legibility gradient */}
+                      <div className="absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
+                      {/* Brand accent line */}
+                      <div className="absolute top-0 inset-x-0 h-1.5 bg-gradient-to-r from-green-500 to-yellow-500" />
+                      {/* Name & role overlaid on image */}
+                      <div className="absolute bottom-0 inset-x-0 p-5 text-white">
+                        <h3 className="gellix-font text-2xl font-bold leading-tight drop-shadow-md">
                           {director.name}
                         </h3>
-                        <p className="gellix-font text-green-600 font-semibold text-lg mb-3 flex items-center justify-center gap-2">
+                        <p className="gellix-font text-green-300 font-semibold text-sm mt-1 flex items-center gap-1.5">
                           <Briefcase className="w-4 h-4" />
                           {director.position}
-                        </p>
-
-                        {/* Location */}
-                        <div className="gellix-font flex items-center justify-center text-gray-500 mb-4 gap-1">
-                          <MapPin className="w-4 h-4" />
-                          <span className="text-sm">{director.location}</span>
-                        </div>
-
-                        {/* Description */}
-                        <p className="gellix-font text-gray-600 text-sm leading-relaxed border-t border-gray-100 pt-4">
-                          {director.description}
                         </p>
                       </div>
                     </div>
 
-                    {/* Professional Footer */}
-                    <div className="bg-gradient-to-r from-green-50 to-yellow-50 px-6 py-4 border-t border-gray-100">
-                      <div className="flex items-center justify-center gap-4">
+                    {/* Content */}
+                    <div className="flex-1 p-6 flex flex-col">
+                      {/* Location */}
+                      <div className="gellix-font flex items-center justify-center text-gray-500 gap-1.5 mb-4">
+                        <MapPin className="w-4 h-4 text-green-600" />
+                        <span className="text-sm">{director.location}</span>
+                      </div>
+
+                      {/* Description */}
+                      <p className="gellix-font text-gray-600 text-sm leading-relaxed text-center">
+                        {director.description}
+                      </p>
+                    </div>
+
+                    {/* Actions */}
+                    <div className="px-6 pb-6 pt-2">
+                      <div className="flex items-center gap-3">
                         {/* Phone */}
                         <a
                           href={`tel:${director.phone}`}
-                          className="group flex items-center gap-2 bg-white px-4 py-2 rounded-sm hover:bg-green-50 transition-all duration-300 shadow-sm hover:shadow-md"
+                          className="flex-1 flex items-center justify-center gap-2 bg-green-600 text-white px-4 py-2.5 rounded-xl hover:bg-green-700 transition-colors duration-300 shadow-sm"
                           title="Call"
                         >
-                          <Phone className="w-4 h-4 text-green-600 group-hover:scale-110 transition-transform" />
-                          <span className="gellix-font text-xs text-gray-700 group-hover:text-green-700 font-medium">
-                            Call
-                          </span>
+                          <Phone className="w-4 h-4" />
+                          <span className="gellix-font text-sm font-semibold">Call</span>
                         </a>
 
                         {/* LinkedIn */}
@@ -700,22 +701,20 @@ const HomePage = () => {
                           href={director.linkedin}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="group flex items-center gap-2 bg-white px-4 py-2 rounded-sm hover:bg-blue-50 transition-all duration-300 shadow-sm hover:shadow-md"
+                          className="flex-1 flex items-center justify-center gap-2 bg-blue-50 text-blue-700 px-4 py-2.5 rounded-xl hover:bg-blue-100 transition-colors duration-300"
                           title="LinkedIn Profile"
                         >
-                          <Linkedin className="w-4 h-4 text-blue-600 group-hover:scale-110 transition-transform" />
-                          <span className="gellix-font text-xs text-gray-700 group-hover:text-blue-700 font-medium">
-                            LinkedIn
-                          </span>
+                          <Linkedin className="w-4 h-4" />
+                          <span className="gellix-font text-sm font-semibold">LinkedIn</span>
                         </a>
                       </div>
 
-                      <div className="flex items-center justify-center gap-4 text-xs text-gray-500 mt-3">
+                      <div className="flex items-center justify-center gap-3 text-xs text-gray-400 mt-4">
                         <div className="flex items-center gap-1">
                           <Building className="w-3 h-3" />
                           <span className="gellix-font">Sacmar Leaf</span>
                         </div>
-                        <div className="w-1 h-1 bg-gray-400 rounded-full" />
+                        <div className="w-1 h-1 bg-gray-300 rounded-full" />
                         <div className="flex items-center gap-1">
                           <Award className="w-3 h-3" />
                           <span className="gellix-font">Executive</span>
